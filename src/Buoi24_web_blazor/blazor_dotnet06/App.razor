@@ -1,0 +1,14 @@
+<Router AppAssembly="@typeof(App).Assembly">
+
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(HomePageMaster)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    @* /hello -: sẽ hiển thị nội dung của NotFound  *@
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView>
+            <p role="alert">Không tồn tại trang </p>
+        </LayoutView>
+    </NotFound>
+</Router>

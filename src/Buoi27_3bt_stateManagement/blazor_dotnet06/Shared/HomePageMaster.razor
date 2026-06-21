@@ -1,0 +1,81 @@
+
+@inherits LayoutComponentBase
+
+<nav
+    class="navbar navbar-expand-sm navbar-dark bg-dark text-white"
+    style="
+        background-color: $ {
+            3: #e3f2fd;
+        }
+    "
+>
+
+    <a class="navbar-brand" href="/">Cybersoft Store</a>
+    <button
+        class="navbar-toggler d-lg-none"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapsibleNavId"
+        aria-controls="collapsibleNavId"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    ></button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" href="/register" aria-current="page"
+                    >Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="dropdownId"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    >Lifecycle</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="/parent">Should component render</a>
+                    <a class="dropdown-item" href="#">Action 2</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="dropdownId"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    >State Management</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="/bt-car">BT Car</a>
+                    <a class="dropdown-item" href="/bt-cart">BT Cart</a>
+                    <a class="dropdown-item" href="/bt-burger">BT Burger</a>
+                </div>
+            </li>
+        </ul>
+        <form class="d-flex my-2 my-lg-0">
+            <input
+                class="form-control me-sm-2"
+                type="text"
+                placeholder="Search"
+            />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                Search
+            </button>
+        </form>
+    </div>
+</nav>
+
+
+<div class="content">
+    @Body
+</div>

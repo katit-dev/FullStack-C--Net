@@ -1,0 +1,33 @@
+@page "/oneway"
+
+<div class="container">
+    <h1>One-way Data Binding</h1>
+    <div class="col card text-start">
+        <img src="@product.ImageUrl" alt="" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">@product.Name</h5>
+            <p class="card-text">@product.Price</p>
+        </div>
+    </div>
+    @* HIen thi thanh tien cua 20 san pham *@
+    <span class="alert aler-danger d-inline-block">
+        Total: @ThanhTien.ToString("C");
+        
+    </span>
+</div>
+
+@code {
+    class ProductModel
+    {
+        public string Name { get; set; } = "Macbook Pro";
+        public decimal Price { get; set; } = 2000;
+
+        public string ImageUrl { get; set; } = "https://piscum.photos/200/300";
+    }
+
+    ProductModel product = new ProductModel();
+
+
+
+    decimal ThanhTien => 20 * product.Price;
+}

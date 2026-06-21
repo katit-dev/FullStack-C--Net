@@ -1,0 +1,83 @@
+﻿@inject NavigationManager nav
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">b19</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable">
+    <nav class="nav flex-column">
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu"></span>
+                <span>Home</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="bi bi-plus-square-fill-nav-menu"></span>
+                <span>Counter</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="weather">
+                <span class="bi bi-list-nested-nav-menu"></span>
+                <span>Weather</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <div class="menu-parent @(showDataBinding ? "open" : "")" @onclick="ToggleDataBinding">
+                <span class="arrow">@(showDataBinding ? "⌄" : "›")</span>
+                <span>DataBinding</span>
+            </div>
+        </div>
+
+        @if (showDataBinding)
+        {
+             <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="baitapxe">
+                    <span>BaiTapXe</span>
+                </NavLink>
+            </div>
+            <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="oneway">
+                    <span>OneWayBinding</span>
+                </NavLink>
+            </div>
+            <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="twoway">
+                    <span>TwoWayBinding</span>
+                </NavLink>
+            </div>
+
+           
+        }
+        
+    </nav>
+</div>
+
+@code {
+    bool showDataBinding;
+
+    protected override void OnInitialized()
+    {
+        var url = nav.Uri.ToLower();
+
+        if (url.Contains("oneway") || url.Contains("baitapxe"))
+        {
+            showDataBinding = true;
+        }
+    }
+
+    void ToggleDataBinding()
+    {
+        showDataBinding = !showDataBinding;
+    }
+}

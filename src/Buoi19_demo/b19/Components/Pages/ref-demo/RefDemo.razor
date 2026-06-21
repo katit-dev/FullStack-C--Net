@@ -1,0 +1,27 @@
+@page "/demo-ref"
+@using b19.Components.Pages.component_param
+
+<div class="container">
+    <h3>Demo ref</h3>
+    <ChildRefDemo @ref="childRefDemo" />
+
+    <button class="btn btn-primary" @onclick="Increase">Tăng</button>
+    <button class="btn btn-danger" @onclick="Decrease">Giảm</button>
+</div>
+
+@code{
+
+    @* tao tham chiếu *@
+    ChildRefDemo childRefDemo;
+
+    void Increase()
+    {
+        childRefDemo.TangGiam(1);
+    }
+
+    void Decrease()
+    {
+        childRefDemo.TangGiam(-1);
+    }
+
+}

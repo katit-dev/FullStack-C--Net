@@ -1,0 +1,26 @@
+@using b19.Models
+<div class="card">
+    <img src="@Item.Image" class="card-img-top" />
+    <div class="card-body">
+        <h5>@Item.Name</h5>
+        <p>@Item.Description</p>
+        <p><b>@Item.Price $</b></p>
+    </div>
+    <button class="btn btn-primary" @onclick="() => ThemGioHang.InvokeAsync(Item)">Add to Cart</button>
+</div>
+
+@code {
+    [Parameter]
+    public ProductCardVM Item { get; set; } = new ProductCardVM();
+
+    [Parameter]
+    @* Func/Action *@
+    @* tham so dan gham co ten la ThemGioHang(ProductCardVM item) *@
+    @* EventCallback: không phải delegate Function bình thường, được quản lý lifecycle bới blazor 
+    ==> để gọi phải dùng InvokeAsync
+    InvokeAsync là  *@
+    public EventCallback<ProductCardVM> ThemGioHang { get; set; }
+    
+
+}
+

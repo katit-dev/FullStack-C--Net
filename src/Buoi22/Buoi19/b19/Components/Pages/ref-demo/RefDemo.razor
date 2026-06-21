@@ -1,0 +1,21 @@
+@page "/ref-demo"
+
+<div class="container">
+    <h3>Demo Ref</h3>
+    <ChildRefDemo @ref="childRefDemo"></ChildRefDemo>
+
+    <button class="btn btn-primary mt-2" @onclick="() => TangGiam(1)">Tăng</button>
+    <button class="btn btn-danger mt-2" @onclick="() => TangGiam(-1)">Giảm</button>
+
+
+</div>
+
+@code{
+    ChildRefDemo childRefDemo;
+
+    @* ham trung gian de goi ham ở component con *@
+    void TangGiam(int so)
+    {
+        childRefDemo.TangGiam(so);
+    }
+}

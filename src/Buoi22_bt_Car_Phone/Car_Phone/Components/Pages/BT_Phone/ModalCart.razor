@@ -1,0 +1,108 @@
+<div class="d-flex  justify-content-end align-items-center">
+    <button type="button"
+    class="btn btn-primary btn-lg"
+    data-bs-toggle="modal"
+    data-bs-target="#cartModal">Giỏ hàng (@gioHang.Sum(x => x.SoLuong))</button>
+</div>
+
+<!-- Modal trigger button -->
+
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div
+    class="modal fade"
+    id="cartModal"
+    tabindex="-1"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    
+    role="dialog"
+    aria-labelledby="modalTitleId"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">
+                    Giỏ hàng của bạn (@gioHang.Sum(x => x.SoLuong) sản phẩm)
+                </h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <div
+                    class="table-responsive"
+                >
+                    <table
+                        class="table table-primary"
+                    >
+                        <thead>
+                            <tr>
+                                <th scope="col">Hinh anh</th>
+                                <th scope="col">Ten san pham</th>
+                                <th scope="col">So luong</th>
+                                <th scope="col">Gia</th>
+                                <th scope="col">Thanh tien</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var sp in gioHang)
+                            {
+                                <tr>
+                                    <td><img src="@sp.HinhAnh" alt="@sp.TenSp" width="50"/></td>
+                                    <td>@sp.TenSp</td>
+                                    <td>@sp.SoLuong</td>
+                                    <td>@sp.GiaBan.ToString("N0") VND</td>
+                                    <td>@((sp.GiaBan * sp.SoLuong).ToString("N0")) VND</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+
+
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Place to the bottom of scripts -->
+<script>
+    const myModal = new bootstrap.Modal(
+        document.getElementById("cartModal"),
+        options,
+    );
+</script>
+
+
+
+
+
+
+@code{
+    [Parameter]
+    public List<CartItemVM> gioHang { get; set; }
+}

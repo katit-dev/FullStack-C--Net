@@ -1,0 +1,241 @@
+:root {
+    --main-color: #35a22c;
+}
+
+.header nav {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+}
+
+.header .navbar a.navbar-brand {
+    color: #fff;
+}
+
+.header .navbar a.navbar-brand i {
+    color: var(--main-color);
+}
+
+.header nav ul li a {
+    transition: all 0.5s;
+    color: #fff;
+    position: relative;
+    margin: 0 2px;
+}
+
+.header nav ul li a:hover {
+    color: var(--main-color);
+}
+
+.header .navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+    color: var(--main-color);
+
+
+}
+
+.header nav ul li a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--main-color);
+    transition: all 0.5s;
+}
+
+.header nav ul li a:hover::after {
+    width: 100%;
+}
+
+/*  chỉnh riêng cho .active */
+.header nav ul li a.active::after {
+    width: 100%;
+}
+
+
+
+/* carousel */
+.carousel .carousel-indicators [data-bs-target] {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.carousel .carousel-item img {
+    width: 200px;
+}
+
+.carousel .carousel-item {
+    height: 700px;
+}
+
+.carousel .carousel-inner .carousel-item img {
+    filter: grayscale(0.3);
+    object-fit: cover;
+    /* height: 100%; */
+
+}
+
+.carousel .carousel-item .carousel-caption img {
+    width: 200px;
+}
+.carousel .carousel-caption{
+        top: 50%;
+    left: 50%;
+    /*  kéo theo x y về lại -50% so với chính nó */
+    transform: translate(-50%, -50%);
+}
+
+/*
+.carousel .carousel-item{
+    height: 800px;
+} */
+
+
+
+/* project */
+.project .nav-pills .nav-link {
+    border: 1px solid #000;
+    color: #000;
+}
+
+.project .nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: var(--main-color);
+    color: #fff;
+    border: 1px solid var(--main-color);
+}
+
+.project .card {
+    box-shadow: 0px 0px 3px 1px rgba(128, 128, 128, 0.267);
+}
+
+.project .card .card-body {
+
+    border-radius: 0 0 2rem 2rem;
+    border: 1px solid transparent;
+    transition: all 0.5s;
+}
+
+.project .card:hover .card-body {
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+    border-top-color: transparent;
+}
+
+/* available */
+.available {
+    background-image: url(./../image/3.jpg);
+    background-position: center;
+    position: relative;
+}
+/*  làm lớp mờ đeer chỉnh filter cho cái nền  */
+.available::before{
+    display: block;
+    position: absolute;
+    content: "";
+    background: rgba(7, 10, 12, 0.72);
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.available .title p {
+    padding: 0 150px;
+}
+
+.available .card-avai {
+    background-color: #80808073;
+    border: 1px solid #808080b8;
+    border-radius: 20px;
+    padding: 40px;
+    transition: all 0.5s;
+    margin-top: 5px;
+}
+
+.available .card-avai i {
+    color: var(--main-color);
+    font-size: 40px;
+}
+
+.available .card-avai h2 {
+    padding: 30px;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+
+}
+.available .card-avai:hover{
+    background-color: #000;
+    border-color: #fff;
+}
+
+
+/* av */
+.achievement{
+    /* background-image: url(./../image/memphis_3.png); */
+    position: relative;
+    padding: 30px 0;
+}
+.achievement-bg{
+background-image: url(./../image/memphis_3.png);
+background-position: left;
+background-size: 50%;
+background-repeat: no-repeat;
+height: 100%;
+width: 100%; 
+position: absolute;
+opacity: 0.5;
+top: 0;
+}
+.achievement .card-achievement  {
+    box-shadow: 0 0 50px 0px #80808061;
+    border-radius: 20px;
+    padding: 50px;
+    
+    backdrop-filter: blur(3px);
+}
+.achievement .card-achievement h2  {
+    font-size: 28px;
+    font-weight: 700;
+    padding-bottom:     20px;
+}
+
+/* footer */
+footer .lst-icon a{
+    color: grey;
+    margin: 0 5px;
+}
+
+footer .lst-icon i{
+   width: 42px;
+    height: 42px;
+    line-height: 42px;
+    border-radius: 50%;
+    border: 1px solid #454545;
+    transition: all 0.5s;
+
+}
+footer .lst-icon a:hover i{
+    color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+
+/* @mixin () */
+
+@media screen and (max-width: 992px) {
+    .carousel .carousel-item {
+        height: 600px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .carousel .carousel-item {
+        height: 500px;
+    }
+}
+

@@ -1,0 +1,200 @@
+﻿@inject NavigationManager nav
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">b19</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable">
+    <nav class="nav flex-column">
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu"></span>
+                <span>Home</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="bi bi-plus-square-fill-nav-menu"></span>
+                <span>Counter</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="weather">
+                <span class="bi bi-list-nested-nav-menu"></span>
+                <span>Weather</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <div class="menu-parent @(showDataBinding ? "open" : "")" @onclick="ToggleDataBinding">
+                <span class="arrow">@(showDataBinding ? "⌄" : "›")</span>
+                <span>DataBinding</span>
+            </div>
+        </div>
+
+        @if (showDataBinding)
+        {
+            <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="baitapxe">
+                    <span>BaiTapXe</span>
+                </NavLink>
+            </div>
+            <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="oneway">
+                    <span>OneWayBinding</span>
+                </NavLink>
+            </div>
+            <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="twoway">
+                    <span>TwoWayBinding</span>
+                </NavLink>
+            </div>
+        }
+
+        <div class="nav-item px-3">
+            <div class="menu-parent @(showComponent_Param ? "open" : "")" @onclick="ToggleComponent_Param">
+                <span class="arrow">@(showComponent_Param ? "⌄" : "›")</span>
+                <span>Component Param</span>
+            </div>
+        </div>
+
+        @if (showComponent_Param)
+        {
+            <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="dsPhone">
+                    <span>Bài tập DS Phone</span>
+                </NavLink>
+            </div>
+            <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="demo-component-param">
+                    <span>Demo Component Param</span>
+                </NavLink>
+            </div>
+        }
+        
+        <div class="nav-item px-3">
+            <div class="menu-parent @(showEventCallback ? "open" : "")" @onclick="ToggleEventCallback">
+                <span class="arrow">@(showEventCallback ? "⌄" : "›")</span>
+                <span>Event Callback</span>
+            </div>
+        </div>
+
+        @if (showEventCallback)
+        {
+            <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="product-list">
+                    <span>Bai Tap Product List</span>
+                </NavLink>
+            </div>
+            
+        }
+        <div class="nav-item px-3">
+            <div class="menu-parent @(showRefDemo ? "open" : "")" @onclick="ToggleRefDemo">
+                <span class="arrow">@(showRefDemo ? "⌄" : "›")</span>
+                <span>Ref Demo</span>
+            </div>
+        </div>
+
+        @if (showRefDemo)
+        {
+            <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="ref-demo">
+                    <span>Ref Demo</span>
+                </NavLink>
+            </div>
+            
+        }
+
+        <div class="nav-item px-3">
+            <div class="menu-parent @(showBaiTap ? "open" : "")" @onclick="ToggleBaiTap">
+                <span class="arrow">@(showBaiTap ? "⌄" : "›")</span>
+                <span>Bài Tập</span>
+            </div>
+        </div>
+
+        @if (showBaiTap)
+        {
+            <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="car">
+                    <span>Bài tập xe component</span>
+                </NavLink>
+            </div>
+            <div class="nav-item submenu px-3">
+                <NavLink class="nav-link" href="car">
+                    <span>Bài tập xe component</span>
+                </NavLink>
+            </div>
+        }
+
+    </nav>
+</div>
+
+@code {
+    bool showDataBinding;
+    bool showComponent_Param;
+    bool showEventCallback;
+    bool showRefDemo;
+    bool showBaiTap;
+    protected override void OnInitialized()
+    {
+        var url = nav.Uri.ToLower();
+
+        if (url.Contains("oneway") || url.Contains("baitapxe"))
+        {
+            showDataBinding = true;
+        }
+
+        if (url.Contains("demo-component-param"))
+        {
+            showComponent_Param = true;
+        }
+
+        if (url.Contains("product-list"))
+        {
+            showEventCallback = true;
+        }
+
+        if (url.Contains("ref-demo"))
+        {
+            showRefDemo = true;
+        }
+
+        if (url.Contains("car"))
+        {
+            showBaiTap = true;
+        }
+
+    }
+
+    void ToggleDataBinding()
+    {
+        showDataBinding = !showDataBinding;
+    }
+
+    void ToggleComponent_Param()
+    {
+        showComponent_Param = !showComponent_Param;
+    }
+
+    void ToggleEventCallback()
+    {
+        showEventCallback = !showEventCallback;
+    }
+
+    void ToggleRefDemo()
+    {
+        showRefDemo = !showRefDemo;
+    }
+
+    void ToggleBaiTap()
+    {
+        showBaiTap = !showBaiTap;
+    }
+}

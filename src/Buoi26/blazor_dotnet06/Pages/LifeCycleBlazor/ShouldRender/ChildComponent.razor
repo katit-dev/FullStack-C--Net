@@ -1,0 +1,84 @@
+@implements IDisposable
+
+
+
+<div class="card border-primary">
+    <div class="card-header bg-light">
+        <h5 class="text-primary mb-0">Dynamic Notification List</h5>
+    </div>
+    <div class="card-body">
+        <div class="list-group list-group-flush">
+            @foreach (var item in listNotify) { 
+                <p>@item</p>
+
+            }
+        </div>
+    </div>
+</div>
+
+<h3>
+    Count down: @count
+
+</h3>
+
+@code {
+    [Parameter]
+    public List<string> listNotify { get; set; }
+
+    private List<string> previousNotifications = new List<string>();
+
+    public int count { get; set; } = 1000;
+    Timer timer;
+
+     protected override async Task OnInitializedAsync ()
+    {
+       timer = new Timer(async (state) =>
+        {
+            if(count > 0){ 
+                Console.WriteLine($@"{count}");
+                count--;
+                StateHasChanged();
+            }
+
+        }, state:null,dueTime:0,period:1000);
+    }
+
+  
+    protected override bool ShouldRender()
+    {
+        //So sánh list lần trước và lần sau có thay đổi hay không nếu thay đổi thì return true -> component phải render lại
+        //Nếu không thay đổi return false -> component không render lại
+        if(!Enumerable.SequenceEqual(listNotify,previousNotifications)){
+            previousNotifications = new List<string>(listNotify) ;
+            return true;
+        }else {
+            return false;
+        }
+
+
+      
+    }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        Console.WriteLine("render child ");
+        
+        if (firstRender)
+        {
+            Console.WriteLine("first render");
+        }
+    }
+
+
+    public void Dispose()
+    {
+        // Ham de huy khi gioa dien component khong con xut hien tren cua so trinh duyet
+        timer.Dispose();
+    }
+
+
+
+
+}
+
+

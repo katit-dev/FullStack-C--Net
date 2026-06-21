@@ -1,0 +1,17 @@
+<p>Số hiện tại: @soHienTai</p>
+
+@code{
+    public int soHienTai = 0;
+
+    public void TangGiam(int so)
+    {
+        soHienTai += so;
+        Console.WriteLine($"Số hiện tại: {soHienTai}");
+        StateHasChanged();
+        @* goi ham nay de cap nhat lai gioa dien kh co su thay doi du lieu
+        
+         *@
+         // báo cho blazor biết là có sự thay đổi dữ liệu và cần cập nhật lại giao diện
+        // khi dùng ref để gọi hàm của con từ cha thì blazor sẽ không tự động cập nhật lại giao diện 
+    }
+}

@@ -1,0 +1,17 @@
+@* Exercise Car Store la 1 component nhan vao 1 component khac thong qua html 
+thi phai co RenderFragment de nhan vao noi dung truyen vao, va RenderFragment co the co tham so de truyen du lieu tu component cha sang component con.
+
+ *@
+
+ <div class="container">
+    <h1>Bai tap xe component</h1>
+    @ChildContent
+
+
+ </div>
+
+ @code{
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+ }
+

@@ -1,0 +1,58 @@
+@page "/baitapxe"
+
+<div class="container">
+    <h1>Bài tập xe</h1>
+
+    <div class="row">
+        <div class="col-6">
+            @* <img style="width: 100%;" src="products/products/@(color)-car.jpg" alt=""> *@
+            <img style="width: 100%;" src="@car.Img" alt="">
+        </div>
+        <div class="col-6 flex justify-content-center align-items-center">
+            @* <button class="btn btn-outline-danger" @onclick='() => DoiMau("red")'>
+                <img width="20px" src="icons/icons/icon-red.jpg" alt=""> Red</button>
+                  
+            <button class="btn btn-outline-secondary" @onclick='() => DoiMau("silver")'>
+                <img width="20px" src="icons/icons/icon-silver.jpg" alt="">
+                Silver</button>
+            <button class="btn btn-outline-secondary" @onclick='() => DoiMau("black")'>
+                <img width="20px" src="icons/icons/icon-black.jpg" alt=""> Black</button>
+            <button class="btn btn-outline-secondary" @onclick='() => DoiMau("steel")'>
+                <img width="20px" src="icons/icons/icon-steel.jpg" alt=""> Steel</button> *@
+            @foreach(var car in cars){
+                <button class="btn btn-outline-danger" @onclick='() => DoiMau(car)'>
+                    <img width="20px" src="@car.Icon" alt=""> @car.Color</button>
+            }
+        </div>
+    </div>
+
+</div>
+
+@code {
+
+    // khai bao 1 xe mac dinh
+     Car car = new Car(){Color = "black", Img = "products/products/black-car.jpg", Icon = "icons/icons/icon-black.jpg"};
+
+    // khai bao 1 list chua cac xe
+    List<Car> cars = new List<Car>(){
+        new Car(){Color = "red", Img = "products/products/red-car.jpg", Icon = "icons/icons/icon-red.jpg"},
+        new Car(){Color = "silver", Img = "products/products/silver-car.jpg", Icon = "icons/icons/icon-silver.jpg"},
+        new Car(){Color = "black", Img = "products/products/black-car.jpg", Icon = "icons/icons/icon-black.jpg"},
+        new Car(){Color = "steel", Img = "products/products/steel-car.jpg", Icon = "icons/icons/icon-steel.jpg"},
+    };
+
+
+    // tao doi tuong xe
+    public class Car{
+        public string Color { get; set; } = "";
+        public string Img { get; set; } = "";
+        public string Icon { get; set; } = "";
+    }
+    
+    string color = "black";
+    void DoiMau(Car newCar){
+        car = newCar;
+    }
+    
+
+}

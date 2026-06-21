@@ -1,0 +1,26 @@
+﻿@inherits LayoutComponentBase
+@*inherits dung de danh dau "day la khung de dung chung"*@
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+        @*the khuyet ten NavMenu : Component*@
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+            @*@body nay : noi dung cua trang con, khi doi duong dan thi chi co phan nay bi thay doi, chu nhung phan ben ngoai khong thay doi (trang ching, trang khung)*@
+        </article>
+    </main>
+</div>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>

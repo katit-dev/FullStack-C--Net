@@ -1,0 +1,20 @@
+
+
+<p>Child component</p>
+@* Sau khi tạo RenderFragment thi gọi ở đây *@
+@ChildContent
+
+
+@* du lieu truyen vao la 1 dang param
+- /{id}: route param
+- ?key=value: query param
+- RenderFragment: child content -> truyền nội dung vào component
+
+
+ *@
+
+ @code {
+
+     [Parameter]
+     public RenderFragment ChildContent { get; set; } = default!;
+ }

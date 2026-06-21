@@ -1,0 +1,52 @@
+@page "/"
+@using System.Text.Json
+
+@inject HttpClient _httpClient
+
+
+<div class="container">
+    <h1>Product list</h1>
+
+    <div class="row">
+        @foreach (var item in products)
+        {
+            <div class="col-md-3">
+                <img src="@item.image" alt="@item.name" class="img-fluid"/>
+                <div class="card-body">
+                    <h3 class="card-title">@item.name</h3>
+                    <p class="card-text">@item.price</p>
+                    <a class="btn btn-dark" href="/detail/@item.id">Detail</a>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+
+@code {
+
+    private List<ProductViewModel> products = new List<ProductViewModel>();
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        //Hàm này sẽ tự động kích hoạt khi component load xong html
+        Console.WriteLine("onnit run");
+        //Hàm thường dùng để lấy dữ liệu từ các server backend khác
+        var response = await _httpClient.GetFromJsonAsync<ResponseType<ProductViewModel[]>>("https://apistore.cybersoft.edu.vn/api/Product");
+        // sau khi co du ieu tu api thi dua len thuoc tinh model cua giao dien
+        products = response.content.ToList();
+
+
+        @* Console.WriteLine(@$"{JsonSerializer.Serialize(response)}"); *@
+
+    }
+
+    protected override void OnInitialized()
+    {
+        
+    }
+
+}

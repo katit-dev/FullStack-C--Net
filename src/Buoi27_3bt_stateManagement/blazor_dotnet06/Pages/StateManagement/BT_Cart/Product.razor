@@ -1,0 +1,33 @@
+@inject CartService _cartService
+@implements IDisposable
+
+<div class="card">
+    <img src="" alt="">
+    <div class="card-body">
+        <img src="@prod.Image" alt="@prod.Name" width="100%" />
+        <h5 class="card-title">@prod.Name</h5>
+        <p class="card-text">@prod.Price.ToString("C")</p>
+        <button class="btn btn-dark" @onclick="() => HandleAddToCart(prod)">Add to card</button>
+    </div>
+</div>
+
+@code{
+    [Parameter]
+    public PhoneViewModel prod {get; set;} = new PhoneViewModel();
+
+    public void HandleAddToCart(PhoneViewModel prod)
+    {
+        _cartService.AddToCart(prod);
+    }
+
+protected override async Task OnInitializedAsync()
+    {
+        _cartService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        _cartService.OnChange -= StateHasChanged;
+    }
+
+}

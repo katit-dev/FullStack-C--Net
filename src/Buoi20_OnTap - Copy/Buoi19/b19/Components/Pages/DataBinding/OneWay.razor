@@ -1,0 +1,26 @@
+@page "/oneway"
+
+<div class="container">
+    <h1>One-Way Data Binding</h1>
+    <div class="card text-start">
+        <img src="@product.Image" alt="Card image" class="card-img-top" style="width:200px; object-fit:cover;">
+        <div class="card-body">
+            <h5 class="card-title">@product.Name</h5>
+            <p class="card-text">Price: @product.Price.ToString("C")</p>
+        </div>
+    </div>
+    <span class="form-label">Total: @Thanhtien.ToString("C")</span>
+</div>
+
+@code {
+    class ProductModel{
+        public string Name { get; set; } = "Asus Zenbook 14";
+        public decimal Price { get; set; } = 20000000;
+        public string Image { get; set; } = "https://picsum.photos/200/300";
+    }
+    ProductModel product = new ProductModel();
+
+
+    decimal Thanhtien => product.Price * 20;
+    
+}

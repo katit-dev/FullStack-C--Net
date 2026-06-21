@@ -1,0 +1,17 @@
+@using b19.Models
+<div class="col-4">
+    <div class="card">
+        <img src="@dienThoai.Image" class="card-img-top" alt="@dienThoai.Name">
+        <div class="card-body">
+            <h5 class="card-title">@dienThoai.Name</h5>
+            <p class="card-text">@dienThoai.Description</p>
+            <p class="card-text">@dienThoai.Price.ToString("C")</p>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public PhoneVM dienThoai { get; set; } = new PhoneVM();
+}

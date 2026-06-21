@@ -1,0 +1,138 @@
+@page "/store-detail/{id}"
+
+@implements IDisposable
+@inject StoreService _storeService
+
+@{
+    StoreViewModel storeDetail = _storeService.storeDetail;
+}
+
+<div class="container">
+    <h3>Product detail - @id</h3>
+    <EditForm Model="@storeDetail" OnValidSubmit="@HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary class="alert alert-danger" />
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <div class="mb-3">
+                <label class="form-label">ID</label>
+                <InputNumber class="form-control"
+                             @bind-Value="storeDetail.Id" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tên cửa hàng</label>
+                <InputText class="form-control"
+                           @bind-Value="storeDetail.Name"
+                           placeholder="Nhập tên cửa hàng" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Alias</label>
+                <InputText class="form-control"
+                           @bind-Value="storeDetail.Alias"
+                           placeholder="Nhập alias" />
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Latitude</label>
+                    <InputText class="form-control"
+                               @bind-Value="storeDetail.Latitude"
+                               placeholder="Ví dụ: 10.762622" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Longtitude</label>
+                    <InputText class="form-control"
+                               @bind-Value="storeDetail.Longtitude"
+                               placeholder="Ví dụ: 106.660172" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Mô tả</label>
+                <InputTextArea class="form-control"
+                               rows="4"
+                               @bind-Value="storeDetail.Description"
+                               placeholder="Nhập mô tả cửa hàng" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ảnh</label>
+                <InputText class="form-control"
+                           @bind-Value="storeDetail.Image"
+                           placeholder="Nhập URL ảnh" />
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(storeDetail.Image))
+            {
+                <div class="mb-3">
+                    <label class="form-label">Xem trước ảnh</label>
+                    <div>
+                        <img src="@storeDetail.Image"
+                             alt="@storeDetail.Name"
+                             class="img-thumbnail"
+                             style="max-width: 250px;" />
+                    </div>
+                </div>
+            }
+
+            <div class="form-check mb-4">
+                <InputCheckbox class="form-check-input"
+                               id="deleted"
+                               @bind-Value="storeDetail.Deleted" />
+                <label class="form-check-label" for="deleted">
+                    Đã xóa
+                </label>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    Lưu
+                </button>
+
+                <button type="button" class="btn btn-secondary">
+                    Nhập lại
+                </button>
+            </div>
+
+        </div>
+    </div>
+</EditForm>
+
+    
+
+    
+</div>
+
+
+@code {
+
+    [Parameter]
+    public string id { get; set; } = "0";
+
+    public async Task HandleSubmit() {
+        //Gọi api update 
+        await _storeService.UpdateStore();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        _storeService.OnChange += StateHasChanged;
+
+        await _storeService.GetStoreById(id);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await _storeService.GetStoreById(id);
+
+    }
+    public void Dispose()
+    {
+        _storeService.OnChange -= StateHasChanged;
+        
+    }
+}

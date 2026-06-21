@@ -1,0 +1,43 @@
+@*localhost:xxxx/login thi vao trang nay*@
+
+@page "/login"
+@*gắn route cho trang login*@
+@*1 trang có thể có nhiều @page*@
+@page "/signin"
+
+
+@*đổi tiều đề bằng tag PageTitle của blazor*@
+<PageTitle>Login</PageTitle>
+
+@*code html *@
+<div class="container">
+    <div class="mb-3">
+        <label for="" class="form-label">@LabelEmail</label>
+        <input type="email" class="form-control" name="" id="" aria-describedby="emailHelpId"
+               placeholder="abc@mail.com" />
+        <small id="emailHelpId" class="form-text text-muted">Help text</small>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">@LabelPassword</label>
+        <input type="password" class="form-control" name="" id="" placeholder="" />
+    </div>
+    <button type="submit" class="btn btn-primary" @onclick="ChangeLabel">Submit</button>
+
+    @*gọi razor component giống cách dùng thẻ html khuyết*@
+    <Button />
+</div>
+
+
+
+
+@code {
+    public string LabelEmail { get; set; } = "Email";
+    public string LabelPassword { get; set; } = "Password";
+
+    public void ChangeLabel()
+    {
+        LabelEmail = "Email address";
+        LabelPassword = "Password";
+    }
+}

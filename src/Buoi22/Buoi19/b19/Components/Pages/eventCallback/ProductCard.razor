@@ -1,0 +1,37 @@
+@using b19.Models
+<div class="col-3">
+    <div class="card">
+        <img src="@sanPham.Image" class="card-img-top" alt="@sanPham.Name">
+        <div class="card-body">
+            <h5 class="card-title">@sanPham.Name</h5>
+            <p class="card-text">@sanPham.Description</p>
+            <p class="card-text">@sanPham.Price.ToString("C")</p>
+            <button class="btn btn-primary" @onclick="AddToCart">Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    @* Đây là bước khai báo param
+    component cha truyền cho con bao nhiêu tham số
+    thì component con phải khai báo bấy nhiêu tham số ở đây
+
+    - parameter thứ 1 là 1 object
+    - parameter thứ 2 là 1 function, nhưng truyền từ cha qua con ==> EventCallback function
+
+     *@
+    [Parameter]
+    public ProductCardVM sanPham { get; set; } = new ProductCardVM();
+
+    [Parameter]
+    @* function/action *@
+    public EventCallback<ProductCardVM> themVaoGioHang { get; set; }
+
+    public void AddToCart()
+    {
+        @* khi click vao button thi se goi function themVaoGioHang, va truyen sanPham hien tai vao function do *@
+        themVaoGioHang.InvokeAsync(sanPham);
+    }
+}

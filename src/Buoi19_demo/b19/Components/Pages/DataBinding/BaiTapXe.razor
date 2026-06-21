@@ -1,0 +1,30 @@
+@page "/baitapxe"
+
+<div class="container">
+    <h1>Change color car</h1>
+    <div class="row">
+        @color
+        <div class="col-6">
+            @* <img src="products/products/black-car.jpg" alt="Black Car" width="100%"> *@
+            <img src="@($"products/products/{color}-car.jpg")" alt="@color Car" width="100%">
+
+        </div>
+        <div class="col-6 flex justify-content-center align-items-center">
+            <button class="btn btn-outline-danger" @onclick='() => ChangeColor("red")'>
+                <img src="icons/icons/icon-red.jpg" alt="Red Car" width="20px">Red</button>
+
+               
+                
+            </div>
+        </div>
+
+    </div>
+@code {
+    string color = "black";
+
+    void ChangeColor(string newColor)
+    {
+        color = newColor;
+        Console.WriteLine($"Color changed to: {color}");
+    }
+}

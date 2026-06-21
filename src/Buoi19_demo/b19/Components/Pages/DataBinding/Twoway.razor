@@ -1,0 +1,141 @@
+@page "/twoway"
+@using System.ComponentModel.DataAnnotations
+<PageTitle>Two-way Binding</PageTitle>
+
+
+@* <input type="text" placeholder="Hãy nhập nội dung" @bind="@content" class="form-control w-50" />
+<br/>
+@content *@
+@* <InputText @bind-Value="content" Placeholder="Hãy nhập nội dung" Class="form-control w-50" /> *@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h4>Register</h4>
+            <EditForm Model="@model" >
+                <DataAnnotationsValidator/> @* kích hoạt validation *@
+                @* gom het tat ca cac validation lai 1 cho *@
+                
+
+                @* nhiều input đauw các input về model / class
+    đăng ký người dùng : email, tên sdt , sở thích , giới tính *@
+                <div class="mb-3">
+                    <label for="" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="" id=""  @bind="@model.Name" @bind:event="oninput"/>
+                    @* hien thi loi neu co *@
+                    <ValidationMessage class="text-danger" For="@(() => model.Name)" />
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="" id="" @bind="@model.Email"  />
+                    <ValidationMessage class="text-danger" For="@(() => model.Email)" />
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">SDT</label>
+                    <input type="text" class="form-control" name="" id=""  @bind="@model.Phone"  />
+                    <ValidationMessage class="text-danger" For="@(() => model.Phone)" />
+                </div>
+                <div class="form-group my-2">
+                    <label>Gender</label>
+                    <input id="Male" class="form-check-input" value="true" name="Gender" type="radio" checked @onchange="(e)=> changeGender(true)"/>
+                    <label for="Male" class="form-check-label">Male</label>
+                    <input id="FeMale" class="form-check-input" value="false" name="Gender" type="radio" @onchange="(e)=> changeGender(false)" />
+                    <label for="FeMale" class="form-check-label">FeMale</label>
+
+                </div>
+
+                @* hobby *@
+                <p>So thich</p>
+                @foreach (var hobby in hobbies)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="@hobby" id="@hobby" @onchange="(e)=> changeHobby(hobby, e.Value)"/>
+                        <label class="form-check-label" for="@hobby">@hobby</label>
+                    </div>
+                }
+
+                @* country *@
+                <div class="mb-3">
+                    <label for="Country" class="form-label">Country</label>
+                    <select class="form-control" id="Country" @bind="@model.Country">
+                        <option value="">-- Select Country --</option>
+                        @foreach (var country in countries)
+                        {
+                            <option value="@country">@country</option>
+                        }
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                
+    
+            </EditForm>
+        </div>
+        <div class="col-6">
+            <h4>Thông tin vừa nhập</h4>
+            <p>UserName: @model.Name</p>
+            <p>Email: @model.Email</p>
+            <p>FullName: @model.Phone</p>
+            <p>Gender: @(model.Gender ? "Male" : "Female")</p>
+            <p>Hobbies: @string.Join(", ", model.Hobbies)</p>
+            <p>Country: @model.Country</p>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    public string content { get; set; } = "Hello CyberSoft";
+
+
+    class RegisterModel
+    {
+        @* @Range(18, 100, ErrorMessage = "Age phải từ 18 đến 100") *@
+        @* validation: kiem tra tinh hop le cua gia tri tung thuoc tinh *@
+        @* kiem tra dinh dang cua email *@
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
+        [Required(ErrorMessage = "Email không được để trống")]
+
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Name không được để trống")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Phone không được để trống")
+         , RegularExpression(@"^\d{10}$", ErrorMessage = "Phone phải có 10 chữ số")]
+        public string Phone { get; set; }
+        public bool Gender { get; set; } // check box
+                                           @* public string Hobby { get; set; } *@
+        public List<string> Hobbies { get; set; } = new List<string>(); // checkbox group
+            public string Country { get; set; } 
+    }
+    RegisterModel model = new RegisterModel();
+
+    public List<string> countries = new List<string>() { "VietNam", "USA", "Japan" };
+    public List<string> hobbies = new List<string>() { "Football", "Music", "Travel" };
+
+
+    public void changeGender(bool value)
+    {
+        model.Gender = value;
+    }
+
+    public void changeHobby(string soThich, object isChecked)
+    {
+        
+        // Neu isChecked la true thi:
+        if ((bool)isChecked)
+        {
+            // Them so thich vao list
+            model.Hobbies.Add(soThich);
+        }
+        else
+        {
+            // Neu isChecked la false thi xoa so thich khoi list
+            model.Hobbies.Remove(soThich);
+        }
+
+    }
+}
+
+@* TWOWAY : cơ chế cho phép đồng bộ hóa dữ liệu giữa giao diện người dùng (UI) và mã C#. Khi dữ liệu
+thay đổi trên UI, nó sẽ tự động cập nhật vào biến trong mã C# và ngược lại. *@

@@ -1,0 +1,56 @@
+<!-- Modal trigger button -->
+
+
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+     aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">
+                    Thông tin chi tiết xe @Item.Name
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+
+
+
+            <div class="modal-body">
+                @* Đây là body của modal
+                - là nơi chứa nội dung chi tiết của sản phẩm
+                 *@
+                <img src="@Item.Img" class="card-img-top" alt="@Item.Name">
+                <p class="card-text">@Item.Price</p>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Place to the bottom of scripts -->
+<script>
+    const myModal = new bootstrap.Modal(
+        document.getElementById("modalId"),
+        options,
+    );
+</script>
+
+
+@code {
+    // code logic cho modal
+    @* nó sẽ nhận vào 1 tham số là đối tượng xe cần hiện thị *@
+    [Parameter]
+    public CarProductVm Item { get; set; } = new CarProductVm();
+
+}
+

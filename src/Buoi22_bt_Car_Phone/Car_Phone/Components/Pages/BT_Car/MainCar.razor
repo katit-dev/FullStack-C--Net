@@ -1,0 +1,33 @@
+@page "/car"
+@page "/"
+
+
+<ExerciseCarStore>
+    <ModalCar Item="@xe" />
+    <ProductListCar>
+        @foreach (CarProductVM car in lstCar)
+        {
+            <ProductItemCar Item="@car" ShowDetail="showDetail"/>
+        }
+    </ProductListCar>
+</ExerciseCarStore>
+
+@code{
+    // ds san pham
+    List<CarProductVM> lstCar = new List<CarProductVM>(){
+            
+            new CarProductVM (){Id=1, Name="Red Car", Img="products/products/red-car.jpg", Price=100},
+            new CarProductVM(){Id=2, Name="Silver Car", Img="products/products/silver-car.jpg", Price=200},
+            new CarProductVM(){Id=3, Name="Steel Car", Img="products/products/steel-car.jpg", Price=300},
+            new CarProductVM(){Id=4, Name="Black Car", Img="products/products/black-car.jpg", Price=400},
+            };
+
+    // 1 san pham mac dinh  de truyen cho modal
+    CarProductVM xe = new CarProductVM();
+
+    // function ShowDetail
+    void showDetail(CarProductVM car)
+    {
+        xe = car;
+    }
+}

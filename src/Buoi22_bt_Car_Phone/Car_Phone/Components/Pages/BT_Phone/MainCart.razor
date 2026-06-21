@@ -1,0 +1,107 @@
+@page "/phone"
+@using Car_Phone.Components.Pages.BT_Car
+
+<ExerciseCart>
+    <ModalCart gioHang="@carts" />
+    <ModalPhone phone="@phone" />
+    <PhoneList>
+        @foreach (PhoneCartVM sp in phones)
+        {
+            <PhoneItem sp="@sp" AddToCart="ThemGioHang" ViewDetails="XemChiTiet"/>
+        }
+    </PhoneList>
+</ExerciseCart>
+
+@code{
+    // ds Phone
+     List<PhoneCartVM> phones = new List<PhoneCartVM>()
+{
+    new PhoneCartVM {
+        MaSp = 1,
+        TenSp = "VinSmart Live",
+        ManHinh = "AMOLED, 6.2, Full HD+",
+        HeDieuHanh = "Android 9.0 (Pie)",
+        CameraTruoc = "20 MP",
+        CameraSau = "Chính 48 MP & Phụ 8 MP, 5 MP",
+        Ram = "4 GB",
+        Rom = "64 GB",
+        GiaBan = 5700000,
+        HinhAnh = "img/vsphone.jpg"
+    },
+    new PhoneCartVM {
+        MaSp = 2,
+        TenSp = "Meizu 16Xs",
+        ManHinh = "AMOLED, FHD+ 2232 x 1080 pixels",
+        HeDieuHanh = "Android 9.0 (Pie); Flyme",
+        CameraTruoc = "20 MP",
+        CameraSau = "Chính 48 MP & Phụ 8 MP, 5 MP",
+        Ram = "4 GB",
+        Rom = "64 GB",
+        GiaBan = 7600000,
+        HinhAnh = "img/meizuphone.jpg"
+    },
+    new PhoneCartVM {
+        MaSp = 3,
+        TenSp = "Iphone XS Max",
+        ManHinh = "OLED, 6.5, 1242 x 2688 Pixels",
+        HeDieuHanh = "iOS 12",
+        CameraTruoc = "7 MP",
+        CameraSau = "Chính 12 MP & Phụ 12 MP",
+        Ram = "4 GB",
+        Rom = "64 GB",
+        GiaBan = 27000000,
+        HinhAnh = "img/applephone.jpg"
+    }
+};
+
+    // 1 cart mac dinh de truyen cho modal
+    List<CartItemVM> carts = new List<CartItemVM>()
+    {
+        
+    };
+
+
+    // fucnction them vao gio hang
+    void ThemGioHang(PhoneCartVM sp){
+        // tim 
+        var find = carts.FirstOrDefault(c => c.MaSp == sp.MaSp);
+        // TH1: chua co trong gio hang
+        // thi chuyen sp tu PhoneCartVM sang CartItemVM va them vao gio hang
+        if(find == null){
+            var item = new CartItemVM{
+                MaSp = sp.MaSp,
+                TenSp = sp.TenSp,
+                GiaBan = sp.GiaBan,
+                HinhAnh = sp.HinhAnh,
+                SoLuong = 1
+            };
+            carts.Add(item);
+        }
+        // TH2: da co trong gio hang
+        // thi tang so luong len 1
+        else{
+            find.SoLuong++;
+        }
+    }
+
+    // 1 sp mac dinh de truyen cho modal
+    PhoneCartVM phone = new PhoneCartVM{
+        MaSp = 1,
+        TenSp = "VinSmart Live",
+        ManHinh = "AMOLED, 6.2, Full HD+",
+        HeDieuHanh = "Android 9.0 (Pie)",
+        CameraTruoc = "20 MP",
+        CameraSau = "Chính 48 MP & Phụ 8 MP, 5 MP",
+        Ram = "4 GB",
+        Rom = "64 GB",
+        GiaBan = 5700000,
+        HinhAnh = "img/vsphone.jpg"
+    };
+
+    // function xem chi tiet san pham
+    void XemChiTiet(PhoneCartVM newPhone){
+        phone = newPhone;
+    }
+
+
+}

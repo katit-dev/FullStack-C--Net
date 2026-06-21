@@ -1,0 +1,19 @@
+﻿<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        @*Found: neu tim thay rout: @page tuong ung thi show gia dien cua @page do*@
+        @* bo ding tuyen *@
+        @*@page "/" thi khi truy cap vao trang chu
+        @page "/counter" thi khi truy cap vao trang counter
+         *@
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(Layout.MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+
+    @*/hello -: se hien thi noi dung cua Not Found*@
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(Layout.MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>

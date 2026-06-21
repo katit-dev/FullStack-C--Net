@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "abc", "abc\abc.csproj", "{34ED2AD5-AEB7-566A-74A4-461E501D820F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buoi18_ontapOOP", "buoi18_ontapOOP\buoi18_ontapOOP.csproj", "{ABD8ACC2-2061-A4A1-35D1-958F34842CED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34ED2AD5-AEB7-566A-74A4-461E501D820F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34ED2AD5-AEB7-566A-74A4-461E501D820F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34ED2AD5-AEB7-566A-74A4-461E501D820F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34ED2AD5-AEB7-566A-74A4-461E501D820F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABD8ACC2-2061-A4A1-35D1-958F34842CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABD8ACC2-2061-A4A1-35D1-958F34842CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABD8ACC2-2061-A4A1-35D1-958F34842CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABD8ACC2-2061-A4A1-35D1-958F34842CED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2C8C69B-D7E8-4A3F-A6E1-789D2F009FE3}
+	EndGlobalSection
+EndGlobal

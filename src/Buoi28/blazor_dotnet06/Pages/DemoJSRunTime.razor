@@ -1,0 +1,42 @@
+@page "/demo-js"
+@inject IJSRuntime _jsRuntime
+
+<div class="container">
+    <img src="/img/anime_cat.png" style="width: 200px; height: 200px;" alt="Animal Cat">
+    <button class="btn btn-primary" @onclick="handleClick">Click me</button>
+
+    <button class="btn btn-primary" @onclick="getDataApi">Get data api</button>
+
+    <button class="btn btn-primary" @onclick="sum">Sum</button>
+
+    <button class="btn btn-primary" @onclick="luuStore">Lưu store</button>
+</div>
+
+
+
+@code{
+    public int a { get; set; } = 10;
+    public int b { get; set; } = 20;
+
+    public async void luuStore(){
+        await _jsRuntime.InvokeVoidAsync("setLocalStorage", "username", "Khanh Vy");
+    }
+    public async void sum()
+    {
+    int tong = await _jsRuntime.InvokeAsync<int>("tinhTong", a, b);
+    
+    Console.WriteLine($"Tổng của {a} và {b} là: {tong}");
+    }
+
+
+    public async void handleClick()
+    {
+        await _jsRuntime.InvokeVoidAsync("sayHello", "CyberSoft", "Khanh Vy");
+
+    }
+
+    public async void getDataApi()
+    {
+        await _jsRuntime.InvokeVoidAsync("fetchDataApi");
+    }
+}

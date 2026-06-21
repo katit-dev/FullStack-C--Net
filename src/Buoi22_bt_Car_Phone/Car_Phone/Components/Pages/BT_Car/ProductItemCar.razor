@@ -1,0 +1,30 @@
+
+<div class="col-3">
+    <div class="card">
+        <img src="@Item.Img" class="card-img-top" alt="@Item.Name">
+        <div class="card-body">
+            <h5 class="card-title">@Item.Name</h5>
+            <p class="card-text">@Item.Price.ToString("C")</p>
+            <button type="button"
+    class="btn btn-primary btn-lg"
+    data-bs-toggle="modal"
+    data-bs-target="#modalId" @onclick="ShowDetailClick">Xem chi tiết</button>
+
+    @* khi nhấn button phải xử lý: truyền dữ liệu xe vào modal *@
+            
+        </div>
+    </div>
+</div>
+
+@code{
+    [Parameter]
+    public CarProductVM Item { get; set; }
+
+    [Parameter]
+    public EventCallback<CarProductVM> ShowDetail { get; set; }
+
+   public void ShowDetailClick()
+    {
+        ShowDetail.InvokeAsync(Item);
+    }     
+}

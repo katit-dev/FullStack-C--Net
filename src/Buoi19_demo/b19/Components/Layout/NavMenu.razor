@@ -1,0 +1,67 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">b19</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="nav flex-column">
+        <div class="nav-item px-3">
+            @*Match rule cua NavLink
+            - mặc định sẽ là Prefix:
+            vd href="counter" --> localhost:xxxx/counter, localhost:xxxx/counter/abc, localhost:xxxx/counter/abc/def đều được active
+            - All: href="counter" --> chỉ có localhost:xxxx/counter mới active, còn localhost:xxxx/counter/abc thì không active
+            *@
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="weather">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="product">
+                <span class="bi bi-box-arrow-in-right-nav-menu" aria-hidden="true"></span> Product
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="oneway">
+                <span class="bi bi-box-arrow-in-right-nav-menu" aria-hidden="true"></span> Oneway
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="baitapxe">
+                <span class="bi bi-box-arrow-in-right-nav-menu" aria-hidden="true"></span> Bai Tap Xe
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="twoway">
+                <span class="bi bi-box-arrow-in-right-nav-menu" aria-hidden="true"></span> Two-way Data Binding
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="product-list">
+                <span class="bi bi-box-arrow-in-right-nav-menu" aria-hidden="true"></span> Product List
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="demo-ref">
+                <span class="bi bi-box-arrow-in-right-nav-menu" aria-hidden="true"></span> Demo Ref
+            </NavLink>
+        </div>
+        
+    </nav>
+</div>
+

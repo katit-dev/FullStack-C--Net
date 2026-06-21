@@ -1,0 +1,51 @@
+@page "/demo-signalr-roomhub"
+@using System.Text.Json
+@implements IDisposable;
+@inject NavigationManager _navigation;
+<div class="container">
+    <h3>List room</h3>
+    <button class="btn btn-success" @onclick="handleAddRoom">Add room blazor</button>
+    <div class="container">
+        <h3>List room</h3>
+        @foreach(RoomViewModel room in lstRoomViewModel){
+            <div class="alert alert-danger">
+                Room - @room.id
+            </div>
+        }
+    </div>
+
+</div>
+
+@code {
+    public List<RoomViewModel> lstRoomViewModel = new List<RoomViewModel>();
+    HubConnection _hub;
+    public void handleAddRoom() {
+        _hub.InvokeAsync("addRoom");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        _hub =  new HubConnectionBuilder()
+                .WithUrl("http://localhost:5069/roomhubs")
+                .WithAutomaticReconnect()
+                .Build();
+        //start connection
+        await _hub.StartAsync();
+        //Lắng nghe server roomhub để load dữ liệu lên stateListRoomViewModel
+        _hub.On<List<RoomViewModel>>("getAllRoom", async (lstRoom) =>
+        {
+            Console.WriteLine(@$"{JsonSerializer.Serialize(lstRoom)}");
+            lstRoomViewModel = lstRoom;
+            //Ép giao diện render lại chủ động
+            await InvokeAsync(StateHasChanged);
+        });
+    }
+
+
+
+    public void Dispose()
+    {
+        //Huỷ theo dõi 
+        _hub.DisposeAsync();
+
+    }
+}

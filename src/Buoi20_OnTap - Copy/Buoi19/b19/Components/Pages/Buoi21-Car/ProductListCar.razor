@@ -1,0 +1,10 @@
+@* component nhan vao 1 danh sach xe *@
+
+<div class="row">
+    @ChildContent
+</div>
+
+@code{
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

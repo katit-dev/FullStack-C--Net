@@ -1,0 +1,56 @@
+@page "/bt-cart"
+@inject CartService _cartService
+@implements IDisposable
+
+<div class="container mt-4">
+    <h3 class="alert alert-warning">Cart Exercise</h3>
+
+    <div class="row">
+        <Cart />
+        @* modal cart *@
+        <div>
+            @* cart icon *@
+            
+            <button type="button"
+    class="btn btn-primary btn-lg"
+    data-bs-toggle="modal"
+    data-bs-target="#modalId">
+                <i class="bi bi-cart-fill"></i>
+                Cart (@_cartService.phonesInCart.Count())
+            </button>
+        </div>
+
+
+
+        @* foreach ds phones *@
+        @foreach (var prod in _cartService.phonesDefault)
+        {
+            <div class="col-3">
+                <Product prod="@prod" />
+            </div>
+        }
+
+
+    </div>
+
+
+</div>
+
+@code
+{
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        _cartService.OnChange += StateHasChanged;
+    }
+
+    
+
+    public void Dispose()
+    {
+        _cartService.OnChange -= StateHasChanged;
+    }
+}

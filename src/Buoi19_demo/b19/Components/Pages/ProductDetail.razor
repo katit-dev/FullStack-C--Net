@@ -1,0 +1,38 @@
+@*/product/sanpham1
+/product/sanpham2
+/product/sanpham3
+là những mã sản phẩm tùy ts, "động" có thể khác nhau theo tứngp mà không cần hardcode
+
+*@
+
+@page "/product/{maSanPham}"
+@* Hiển thị chi tiết sản phẩm dựa trên mã sản phẩm *@
+
+@*localhost:xxxx/product/sanpham1*@
+
+<div class="container">
+    <h1>Chi tiết sản phẩm</h1>
+    <p>Mã sản phẩm: @maSanPham</p>
+    <a href="/product">Quay lại</a> |
+
+    <h3>Query Parameters</h3>
+    <p>Name: @name</p>
+    <p>Age: @age</p>
+</div>
+
+@code {
+    [Parameter]
+    public string maSanPham { get; set; } = string.Empty;
+
+    // query parameter: product/San-pham1?name=vy&age=20
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? name { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int? age { get; set; }
+
+
+
+}

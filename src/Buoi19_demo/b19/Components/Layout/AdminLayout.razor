@@ -1,0 +1,119 @@
+@inherits LayoutComponentBase
+
+<!-- Admin Layout using Bootstrap 5 -->
+<div class="d-flex vh-100">
+    <!-- Sidebar - Using Bootstrap Offcanvas for mobile, fixed for desktop -->
+    <div class="offcanvas-lg offcanvas-start bg-primary" id="adminSidebar">
+        <div class="offcanvas-header bg-dark text-white">
+            <h5 class="offcanvas-title">
+                <i class="fas fa-cog me-2"></i>
+                Admin Panel
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" data-bs-target="#adminSidebar"></button>
+        </div>
+        
+        <div class="offcanvas-body p-0 bg-primary justify-content-between d-flex flex-column">
+            <!-- Navigation Menu -->
+            <nav class="nav flex-column p-3">
+                <a class="nav-link text-white mb-2 rounded" href="/admin/dashboard">
+                    <i class="fas fa-tachometer-alt me-2"></i>
+                    Dashboard
+                </a>
+                <a class="nav-link text-white mb-2 rounded" href="/admin/products">
+                    <i class="fas fa-box me-2"></i>
+                    Quản lý sản phẩm
+                </a>
+                <a class="nav-link text-white mb-2 rounded" href="/admin/categories">
+                    <i class="fas fa-tags me-2"></i>
+                    Danh mục
+                </a>
+                <a class="nav-link text-white mb-2 rounded" href="/admin/orders">
+                    <i class="fas fa-shopping-cart me-2"></i>
+                    Đơn hàng
+                </a>
+                <a class="nav-link text-white mb-2 rounded" href="/admin/users">
+                    <i class="fas fa-users me-2"></i>
+                    Người dùng
+                </a>
+                <a class="nav-link text-white mb-2 rounded" href="/admin/reports">
+                    <i class="fas fa-chart-bar me-2"></i>
+                    Báo cáo
+                </a>
+                <a class="nav-link text-white mb-2 rounded" href="/admin/settings">
+                    <i class="fas fa-cog me-2"></i>
+                    Cài đặt
+                </a>
+            </nav>
+            
+            <!-- Bottom section -->
+            <div class="mt-auto p-3 border-top border-white border-opacity-25">
+                <a class="nav-link text-white rounded" href="/">
+                    <i class="fas fa-sign-out-alt me-2"></i>
+                    Về trang chủ
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-fill d-flex flex-column">
+        <!-- Top Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom">
+            <div class="container-fluid">
+                <!-- Sidebar Toggle (Mobile) -->
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#adminSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <span class="navbar-brand mb-0 h1 ms-2">Quản trị hệ thống</span>
+                
+               
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="flex-fill p-4" style="background-color: #f8f9fa; overflow-y: auto;">
+            @Body
+        </main>
+    </div>
+</div>
+
+<!-- Custom styles for admin -->
+<style>
+    /* Active nav link styling */
+    .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        transform: translateX(5px);
+        transition: all 0.3s ease;
+    }
+    
+    /* Sidebar fixed width on desktop */
+    @@media (min-width: 768px) {
+        .offcanvas-lg {
+            width: 250px !important;
+        }
+    }
+    
+    /* Smooth transitions */
+    .nav-link {
+        transition: all 0.3s ease;
+    }
+    
+    /* Custom scrollbar for main content */
+    main::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    main::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    main::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+    }
+    
+    main::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+</style>

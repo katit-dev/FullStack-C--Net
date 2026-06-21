@@ -1,0 +1,26 @@
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="typeof(HomePageMaster)">
+                
+                
+                <NotAuthorized>
+                    <h3>Bạn chưa được phép truy cập vào trang này. Vui lòng đăng nhập!</h3>
+                </NotAuthorized>
+
+            </AuthorizeRouteView>
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+
+        </Found>
+        @* /hello -: sẽ hiển thị nội dung của NotFound  *@
+        <NotFound>
+            <PageTitle>Not found</PageTitle>
+            <LayoutView>
+                <p role="alert">Không tồn tại trang </p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>
+
+

@@ -1,0 +1,95 @@
+@page "/phone-cart"
+@using b19.Models
+
+<ExerciseCart>
+    @* cart nhan vao 1 gio hang chua cac san pham *@
+    <Cart gioHang="@carts"/>
+
+    <B22ProductList dssp="@phones" themGioHang="@ThemGioHang">
+        @* chay vong lap render B22ProductItem *@
+
+
+    </B22ProductList>
+
+
+    @* code show san pham hien tai *@
+</ExerciseCart>
+
+@code {
+    // ds Phone
+   List<PhoneCartVM> phones = new List<PhoneCartVM>()
+{
+    new PhoneCartVM {
+        MaSp = 1,
+        TenSp = "VinSmart Live",
+        ManHinh = "AMOLED, 6.2, Full HD+",
+        HeDieuHanh = "Android 9.0 (Pie)",
+        CameraTruoc = "20 MP",
+        CameraSau = "Chính 48 MP & Phụ 8 MP, 5 MP",
+        Ram = "4 GB",
+        Rom = "64 GB",
+        GiaBan = 5700000,
+        HinhAnh = "img/vsphone.jpg"
+    },
+    new PhoneCartVM {
+        MaSp = 2,
+        TenSp = "Meizu 16Xs",
+        ManHinh = "AMOLED, FHD+ 2232 x 1080 pixels",
+        HeDieuHanh = "Android 9.0 (Pie); Flyme",
+        CameraTruoc = "20 MP",
+        CameraSau = "Chính 48 MP & Phụ 8 MP, 5 MP",
+        Ram = "4 GB",
+        Rom = "64 GB",
+        GiaBan = 7600000,
+        HinhAnh = "img/meizuphone.jpg"
+    },
+    new PhoneCartVM {
+        MaSp = 3,
+        TenSp = "Iphone XS Max",
+        ManHinh = "OLED, 6.5, 1242 x 2688 Pixels",
+        HeDieuHanh = "iOS 12",
+        CameraTruoc = "7 MP",
+        CameraSau = "Chính 12 MP & Phụ 12 MP",
+        Ram = "4 GB",
+        Rom = "64 GB",
+        GiaBan = 27000000,
+        HinhAnh = "img/applephone.jpg"
+    }
+};
+
+           
+    // cart: chua 1 san pham
+    // cart ở đây cần bổ sung thêm cột số lượng  
+    List<CartItemVM> carts = new List<CartItemVM>()
+    {
+        
+    };
+
+    // card dang xem chi tiet
+
+    // them gio hang
+    void ThemGioHang(PhoneCartVM sp)
+    {
+        // nhan vao phone, nen phai chuyen doi phone sang cart
+        // FirstOrDefault: khong tim thay tra ve default (null), tim thay tra ve sp trong gio hang
+        // First: khong tim thay tra ve loi, tim thay tra ve sp trong gio hang
+
+        // TH1: sp chua co trong gio hang
+        var find = carts.FirstOrDefault(x => x.MaSp == sp.MaSp);
+        if(find == null){
+            var cart = new CartItemVM
+            {
+                MaSp = sp.MaSp,
+                TenSp = sp.TenSp,
+                GiaBan = sp.GiaBan,
+                HinhAnh = sp.HinhAnh,
+                SoLuong = 1
+            };
+            carts.Add(cart);
+        }
+        // TH2: sp da co trong gio hang, tang so luong len 1
+        else{
+            find.SoLuong += 1;
+        }
+    }
+}

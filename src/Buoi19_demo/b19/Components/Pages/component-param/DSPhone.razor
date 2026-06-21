@@ -1,0 +1,33 @@
+@page "/dsPhone"
+@using b19.Models
+
+@* hien thi san pham *@
+<div class="container">
+
+    <XinChao Name="Khanh Vy"/>
+
+    <div class="row">
+        @foreach (var item in lst)
+        {
+           <Phone dienThoai="@item"/>
+        }
+
+    </div>
+</div>
+
+
+@code{
+    // ds điện thoại
+    //điện thaoị là 1 class có các thuộc tính như: id, name, price, image, description
+
+   List<PhoneVM> lst = new List<PhoneVM>
+    {
+        new PhoneVM { Id = 1, Name = "iPhone 12", Price = 999, Image = "https://tpmobile.vn/wp-content/uploads/2022/07/iphone-12-64gb-quoc-te-like-new-99.png", Description =
+        "The latest iPhone with A14 Bionic chip." },
+        new PhoneVM { Id = 2, Name = "Samsung Galaxy S21", Price = 899, Image = "https://tpmobile.vn/wp-content/uploads/2022/07/iphone-12-64gb-quoc-te-like-new-99.png",
+        Description = "The latest Samsung phone with Exynos 2100." },
+        new PhoneVM { Id = 3, Name = "Google Pixel 5", Price = 699, Image = "https://tpmobile.vn/wp-content/uploads/2022/07/iphone-12-64gb-quoc-te-like-new-99.png",
+        Description = "Google's flagship phone with pure Android experience." }
+    };
+
+}

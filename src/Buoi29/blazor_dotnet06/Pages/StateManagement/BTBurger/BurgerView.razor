@@ -1,0 +1,26 @@
+@inject BurgerService _burgerService
+@implements IDisposable
+
+
+
+<div class="breadTop"></div>
+
+@foreach(var item in _burgerService.lstTopping){
+    for(int i = 0; i < item.quantity; i++){
+        <div class="@item.name"></div>
+    }
+}
+
+<div class="breadBottom"></div>
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+        _burgerService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        _burgerService.OnChange -= StateHasChanged;
+    }
+}

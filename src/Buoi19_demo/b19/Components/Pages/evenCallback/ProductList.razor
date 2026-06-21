@@ -1,0 +1,52 @@
+@page "/product-list"
+@* @using b19.Models *@
+@* co the bo using, vi da khai bao dung chung o _imports.razor *@
+
+<PageTitle>Product List</PageTitle>
+
+
+@* render foreach sp trong list ra giao dien
+moi sp la 1 component con nhan vao 1 object la sp do
+de hien thi thogn sp - productCard.razor
+ *@
+
+<div class="row">
+    @foreach (var item in lst)
+    {
+        <div class="col-3">
+            <ProductCard Item="@item" ThemGioHang="AddToCart"/>
+        </div>
+    }
+</div>
+
+<h3>Shopping Cart (@cart.Count)</h3>
+<div class="row">
+    @foreach (var item in cart)
+    {
+        <p>@item.Name - @item.Price $</p>
+    }
+</div>
+
+@code{
+    // ds sp
+    List<ProductCardVM> lst = new List<ProductCardVM>
+    {
+        new ProductCardVM { Name = "iPhone 12", Price = 999, Image = "https://tpmobile.vn/wp-content/uploads/2022/07/iphone-12-64gb-quoc-te-like-new-99.png", Description =
+        "The latest iPhone with A14 Bionic chip." },
+        new ProductCardVM { Name = "Samsung Galaxy S21", Price = 899, Image = "https://tpmobile.vn/wp-content/uploads/2022/07/iphone-12-64gb-quoc-te-like-new-99.png",
+        Description = "The latest Samsung phone with Exynos 2100." },
+        new ProductCardVM { Name = "Google Pixel 5", Price = 699, Image = "https://tpmobile.vn/wp-content/uploads/2022/07/iphone-12-64gb-quoc-te-like-new-99.png",
+        Description = "Google's flagship phone with pure Android experience." }
+    };
+
+
+    // ds gio hang
+    List<ProductCardVM> cart = new List<ProductCardVM>();
+
+
+    // ham them gio hang
+    public void AddToCart(ProductCardVM item)
+    {
+        cart.Add(item);
+    }
+}

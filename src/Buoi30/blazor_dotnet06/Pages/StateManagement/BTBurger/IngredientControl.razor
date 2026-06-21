@@ -1,0 +1,59 @@
+@inject BurgerService _burgerService
+@implements IDisposable
+
+<table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in _burgerService.lstTopping){
+                       string total = (item.price * item.quantity).ToString("N0") + " VND";
+                       
+                        <tr>
+                            <td>@item.name</td>
+                            <td>@item.price</td>
+                            <td>
+
+                                <button class="btn btn-primary mx-2" @onclick="() => HandleUpdateQuantity(item.name, 1)">+</button>
+                                @item.quantity
+                                <button class="btn btn-primary mx-2" @onclick="() => HandleUpdateQuantity(item.name, -1)">-</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" @onclick="@(e => _burgerService.RemoveItem(item.name))">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Total</td>
+                        <td>
+                            @(_burgerService.lstTopping.Sum(item => item.price * item.quantity).ToString("N0") + " VND")
+                        </td>
+                    </tr>
+                </tfoot>
+               
+            </table>
+
+@code{
+
+    public async Task HandleUpdateQuantity(string name, int quantity){
+         _burgerService.ChangeQuantity(name, quantity);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        _burgerService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        _burgerService.OnChange -= StateHasChanged;
+    }
+}

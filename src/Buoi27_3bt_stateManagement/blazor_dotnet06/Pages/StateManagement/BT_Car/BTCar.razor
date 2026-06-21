@@ -1,0 +1,40 @@
+@page "/bt-car"
+@inject CarService _carService
+@implements IDisposable
+
+
+<div class="container">
+    <h3>Car Color Changing Exercise</h3>
+    <div class="row">
+        <div class="col-6">
+            <img src="img/@(_carService.currentColor)-car.jpg" class="img-fluid" alt="" />
+        </div>
+        <div class="col-6">
+            <button class="btn btn-dark me-2" @onclick='() => HandleChangeColor("black")'>Black Car</button>
+            <button class="btn btn-dark me-2" @onclick='() => HandleChangeColor("red")'>Red Car</button>
+            <button class="btn btn-dark me-2" @onclick='() => HandleChangeColor("silver")'>Silver Car</button>
+            <button class="btn btn-dark me-2" @onclick='() => HandleChangeColor("steel")'>Steel Car</button>
+            
+        </div>
+    </div>
+</div>
+
+@code {
+
+    
+    public void HandleChangeColor(string color){
+        _carService.changeColor(color);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _carService.OnChange += StateHasChanged;
+    }
+
+
+    public void Dispose()
+    {
+        _carService.OnChange -= StateHasChanged;
+    }
+
+}

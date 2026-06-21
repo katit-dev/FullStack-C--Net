@@ -1,0 +1,57 @@
+@* 
+ - async: bất đồng bộ
+    - await: chờ đợi kết quả trả về của 1 tác vụ bất đồng bộ
+
+    vd: public async Task GetDataFromAPI()
+    {
+       await Task.Delay(3000); // giả lập thời gian chờ đợi trả về kết quả của API
+         // code xử lý kết quả trả về của API
+    }
+
+ *@
+@page "/laydulieuapi"
+@using System.Text.Json
+@inject HttpClient _httpClient
+@* vì httpClient này không có sẵn trong blazor, nên phải inject từ DI ở program.cs *@
+
+ <div>
+    <button class="btn btn-primary" @onclick="GetDataFromAPI">Lấy dữ liệu từ API</button>
+    <p>@mess</p>
+    <p>@lspro.Count()</p>
+
+    @foreach(var item in lspro)
+    {
+        <p>@item.name</p>
+    }
+ </div>
+
+
+ @code{
+
+    // task tương đương với void
+    // nhưng task phù hợp với các phương thức bất đồng bộ, có thể trả về kết quả hoặc không trả về kết quả
+
+    string mess = "";
+    List<ProductApiVM> lspro = new List<ProductApiVM>();
+    public async Task GetDataFromAPI()
+    {
+        Console.WriteLine("Da lay du lieu tu API xong");
+        mess = "Da lay du lieu ....";
+
+        // gọi api
+        string ketQua = await _httpClient.GetStringAsync("https://svcy.myclass.vn/api/ProductApi/getall");
+         // chuyen tu chuoi -> list<ProductAPIVM> tuong uong
+          lspro = JsonSerializer.Deserialize<List<ProductApiVM>>(ketQua, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        await Task.Delay(3000); // giả lập thời gian chờ đợi trả về kết quả của API
+         // code xử lý kết quả trả về của API
+        Console.WriteLine("Da xu ly du lieu sau 3s");
+        mess = "Da xu ly du lieu sau 3s";
+
+         Console.WriteLine(ketQua);
+         Console.WriteLine(lspro.Count);
+         Console.WriteLine(lspro[0].name);
+
+         
+    }
+ }

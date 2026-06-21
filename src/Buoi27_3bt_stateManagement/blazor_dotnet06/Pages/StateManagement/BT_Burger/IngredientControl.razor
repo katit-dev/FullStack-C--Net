@@ -1,0 +1,93 @@
+@inject BurgerService _burgerService
+@implements IDisposable
+
+<div class="col-md-6">
+    <h3>Custom Your Burger</h3>
+
+    <div class="table-responsive">
+        <table class="table table-primary">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in _burgerService.lstIngredient)
+                {
+                    int thanhTien = item.quantity * item.price;
+                    <tr class="">
+                        <td scope="row">@item.name</td>
+                        <td>@item.price</td>
+                        <td>
+                            <button class="btn btn-primary" @onclick='() => HandleUpdateQuantity(item.name, -1)'>-</button>
+                            <span>@item.quantity</span>
+                            <button class="btn btn-primary" @onclick='() => HandleUpdateQuantity(item.name, 1)'>+</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" @onclick='() => HandleRemove(item.name)'>Remove</button>
+                        </td>
+                        <td>@thanhTien</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td style="font-size: 20px; font-weight: 700; color: rgb(221, 186, 31);" colspan="4">Total</td>
+                    <td>@_burgerService.lstIngredient.Sum(i => i.quantity * i.price)</td>
+                </tr>
+                
+            </tfoot>
+        </table>
+    </div>
+    <div class="mt-4">
+        <h4>Add Ingredient</h4>
+        <button class="btn btn-success"
+                @onclick='() => HandleAddIngredient(new Ingredient() { name = "salad", price = 5, quantity = 1 })'>Add
+            Salad</button>
+            <button class="btn btn-success"
+                    @onclick='() => HandleAddIngredient(new Ingredient() { name = "beef", price = 20, quantity = 1 })'>Add
+                Beef</button>
+                <button class="btn btn-success"
+                        @onclick='() => HandleAddIngredient(new Ingredient() { name = "cheese", price = 10, quantity = 1 })'>Add
+                    Cheese</button>
+                </div>
+
+          
+            </div>
+@code {
+    // ============ Logic Method ===================
+    public void HandleUpdateQuantity(string name, int quantity)
+    {
+        _burgerService.upateIngredient(name, quantity);
+    }
+    public void HandleRemove(string name)
+    {
+        _burgerService.removeIngredient(name);
+    }
+    public void HandleAddIngredient(Ingredient newIngredient)
+    {
+        _burgerService.AddIngredient(newIngredient);
+    }
+
+
+
+
+
+    // ============ Logic Method ===================
+
+    protected override async Task OnInitializedAsync()
+    {
+        _burgerService.OnChange += StateHasChanged;
+    }
+    public void Dispose()
+    {
+       
+        _burgerService.OnChange -= StateHasChanged;
+    }
+
+}

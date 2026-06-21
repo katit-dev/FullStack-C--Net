@@ -1,0 +1,97 @@
+@inject CartService _cartService
+@implements IDisposable
+
+<!-- Modal trigger button -->
+
+
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+     aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">
+                    Detail Cart
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-primary">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in _cartService.phonesInCart)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>
+                                        <img src="@item.Image" alt="@item.Name" width="50" height="50" />
+                                    </td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Price.ToString("C")</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-danger" @onclick='() => HandleUpdateCart(item, -1)'>-</button>
+                                        <span class="mx-2">@item.Quantity</span>
+                                        <button class="btn btn-sm btn-outline-primary" @onclick='() => HandleUpdateCart(item, 1)'>+</button>
+                                    </td>
+                                    <td>@((item.Price * item.Quantity).ToString("C"))</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger" @onclick='() => HandleRemoveFromCart(item)'>Remove</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Place to the bottom of scripts -->
+<script>
+    const myModal = new bootstrap.Modal(
+        document.getElementById("modalId"),
+        options,
+    );
+</script>
+
+@code {
+    public void HandleRemoveFromCart(PhoneViewModel prod)
+    {
+        _cartService.RemoveFromCart(prod);
+    }
+    public void HandleUpdateCart(PhoneViewModel prod, int quantity)
+    {
+        _cartService.UpdateQuantity(prod, quantity);
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        _cartService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        _cartService.OnChange -= StateHasChanged;
+    }
+}

@@ -1,0 +1,30 @@
+@page "/profile"
+@attribute [Authorize]
+@inject AuthenticationStateProvider _auth
+
+
+
+<div class="container">
+    <h3>Profile</h3>
+    @if (_authen?.User.Identity.IsAuthenticated == true)
+    {
+        <p>Hello @_authen.User.FindFirst(ClaimTypes.Name)?.Value</p>
+        <p>Hello @_authen.User.FindFirst("Thông tin thêm")?.Value</p>
+        <p>Role: @_authen.User.FindFirst(ClaimTypes.Role)?.Value</p>
+    }
+    
+</div>
+
+@code {
+    AuthenticationState _authen;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _authen = await _auth.GetAuthenticationStateAsync();
+
+
+        Console.WriteLine(@$"{JsonSerializer.Serialize(_authen.User.Identity)}");
+
+       
+    }
+}

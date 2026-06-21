@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+    <!-- link Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- link css -->
+     <link rel="stylesheet" href="./style/style.css" />
+    </head>
+
+<body>
+   <div class="container">
+    <!-- class container lam cho web chiem 80% va can giua -->
+     <!-- class container fluid lam cho web chiem 100% -->
+        <h1 class="text-danger">Bootstrap</h1>
+    <p>framework css : tang toc do code vaf css nhanh hon</p>
+    <p>Mau chu bắt đầu bằng text , màu nền bg</p>
+    <p class="text-danger">Mau chu do - text-danger</p>
+    <p class="text-primary">Mau chu xanh - text-primary</p>
+    <p class="text-success">Mau chu xanh la - text-success</p>
+    <p class="text-warning">Mau chu vang - text-warning</p>
+    <p class="text-info">Mau chu xanh duong - text-info</p>
+    <p class="text-light bg-dark">Mau chu trang - text-light</p>
+    <p class="text-dark">Mau chu den - text-dark</p>
+
+    <div>
+        <h1>Display</h1>
+        <!-- d-none, d-block, d-inline, d-inline-block, d-flex, d-grid -->
+        <div>
+            <h2>Display</h2>
+
+            <!--  d-none, d-block, d-inline, d-inline-block -->
+            <p class="d-none">This paragraph will not be displayed.</p>
+            <span class="d-block">This paragraph will be displayed as a block element.</span>
+            <p class="d-inline">This paragraph will be displayed as an inline element.</p>
+            <span class="d-inline-block w-50">This paragraph will be displayed as an inline-block element.</span>
+        </div>
+
+        <br>
+
+        <div class="custom d-flex justify-content-between align-items-center bg-secondary py-5">
+            <!-- py la padding vertical -->
+             <!-- px la padding horizontal -->
+              <!-- pt la padding top -->
+               <!-- p- la padding -->
+
+               <!-- m- la margin -->
+                <!-- mt la margin top -->
+                <!-- me hoac mr la margin right -->
+                <!-- mb la margin bottom -->
+                <!-- ms hoac ml la margin left -->
+
+            <div class="bg-danger border border-1 border-black" style="width: 100px; height: 100px;"></div>
+            <div class="bg-warning border border-1 border-black" style="width: 100px; height: 100px;"></div>
+            <div class="bg-danger border border-1 border-black" style="width: 100px; height: 100px;"></div>
+            <div class="bg-warning border border-1 border-black" style="width: 100px; height: 100px;"></div>
+
+        </div>
+
+        <!-- row -->
+         <div class="row">
+            <div class="col-3">
+                <div class="square"></div>
+            </div>
+            <div class="col-3">
+                <div class="square"></div>
+            </div>
+            <div class="col-3">
+                <div class="square"></div>
+            </div>
+            <div class="col-3">
+                <div class="square"></div>
+            </div>
+         </div>
+
+         <div class="row">
+             <!-- gap-2 : khoảng cách giữa các cột -->
+              <!-- g-0 : xóa khoảng cách giữa các cột -->
+
+              <!-- chia luot thanh 12 cot -->
+               <!-- col-x voi x la so cot muon chia -->
+                <!-- col-3 tuc la chia thanh 3 cot -->
+
+              <!-- sm > 576px, md > 768px, lg > 992px, xl > 1200px -->
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                 <div class="card text-start">
+                    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGmBoSLGmjzxN1GBnMj7dF76XO19yv9H3d0g&s" alt="Title" />
+                    <div class="card-body">
+                        <h4 class="card-title">Title</h4>
+                        <p class="card-text">Body</p>
+                    </div>
+                </div>                
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                 <div class="card text-start">
+                    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGmBoSLGmjzxN1GBnMj7dF76XO19yv9H3d0g&s" alt="Title" />
+                    <div class="card-body">
+                        <h4 class="card-title">Title</h4>
+                        <p class="card-text">Body</p>
+                    </div>
+                </div>                
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                 <div class="card text-start">
+                    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGmBoSLGmjzxN1GBnMj7dF76XO19yv9H3d0g&s" alt="Title" />
+                    <div class="card-body">
+                        <h4 class="card-title">Title</h4>
+                        <p class="card-text">Body</p>
+                    </div>
+                </div>                
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                 <div class="card text-start">
+                    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGmBoSLGmjzxN1GBnMj7dF76XO19yv9H3d0g&s" alt="Title" />
+                    <div class="card-body">
+                        <h4 class="card-title">Title</h4>
+                        <p class="card-text">Body</p>
+                    </div>
+                </div>                
+            </div>
+         </div>
+
+
+    </div>
+   </div>
+
+
+    <header>
+        <!-- place navbar here -->
+    </header>
+    <main></main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

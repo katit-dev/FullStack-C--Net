@@ -1,0 +1,20 @@
+<div>
+    <h2>Danh sach san pham</h2>
+
+    <div class="row">
+        @foreach (var sp in dssp)
+        {
+            <B22ProductItem sp="@sp" themGioHang="@themGioHang"/>
+        }
+    </div>
+
+
+</div>
+
+@code{
+    [Parameter]
+    public List<PhoneCartVM> dssp { get; set; }
+
+    [Parameter]
+    public EventCallback<PhoneCartVM> themGioHang { get; set; }
+}

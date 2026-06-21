@@ -1,0 +1,33 @@
+@inject CartService _cartService
+
+<div class="card">
+    <img src="@prod.image" alt="@prod.name">
+    <div class="card-body">
+        <h3>@prod.name</h3>
+        <p>Price: @prod.price.ToString("N0") VND</p>
+        <button class="btn btn-dark" @onclick = "() => HandleAddToCart(prod)">Add to cart</button>
+    </div>
+</div>
+
+@code{
+    [Parameter]
+    public ProductCartViewModel? prod { get; set; } = new ProductCartViewModel();
+
+    public async Task HandleAddToCart(ProductCartViewModel itemClick)
+    {
+        await _cartService.AddItem(itemClick);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _cartService.OnChange += StateHasChanged;
+    }
+
+    
+
+    public void Dispose()
+    {
+        _cartService.OnChange -= StateHasChanged;
+    }
+
+}

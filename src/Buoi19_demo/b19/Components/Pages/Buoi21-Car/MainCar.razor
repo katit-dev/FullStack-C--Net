@@ -1,0 +1,22 @@
+<ExerciseCarStore>
+    <ModalCar />
+
+    <ProductListCar>
+        foreach (var CarProductVM car in CarProducts)
+        {
+            <ProductCar Product="car" />
+        }
+    </ProductListCar>
+
+
+</ExerciseCarStore>
+
+
+@code{
+    private List<CarProductVM> CarProducts = new List<CarProductVM>
+    {
+        new CarProductVM { Id = 1, Name = "Car A", Description = "Description for Car A", Price = 10000 },
+        new CarProductVM { Id = 2, Name = "Car B", Description = "Description for Car B", Price = 15000 },
+        new CarProductVM { Id = 3, Name = "Car C", Description = "Description for Car C", Price = 20000 }
+    };
+}

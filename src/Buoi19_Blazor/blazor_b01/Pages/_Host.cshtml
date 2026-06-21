@@ -1,0 +1,31 @@
+﻿@page "/"
+@namespace blazor_b01.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Components.Web
+@using blazor_b01.Components
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="~/" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/app.css" />
+    <link rel="stylesheet" href="~/blazor_b01.styles.css" />
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+</head>
+
+<body>
+    <component type="typeof(App)" render-mode="ServerPrerendered" />
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">&#x2715;</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+</body>
+
+</html>

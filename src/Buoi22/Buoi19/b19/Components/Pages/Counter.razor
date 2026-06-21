@@ -1,0 +1,28 @@
+﻿@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+<div class="card col-5">
+    <img src="https://picsum.photos/200/300" alt="Card image" class="card-img-top" style="width:200px; object-fit:cover;">
+    <div class="card-body">
+        <h5 class="card-title">Jessica</h5>
+        <p class="card-text">25 years old</p>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-danger" @onclick="() => TangGiam(-1)">Dislike</button>
+        @countLike
+        <button class="btn btn-primary" @onclick="() => TangGiam(1)">Like</button>
+    </div>
+</div>
+
+
+@code{
+
+    @* bien countLike duoc goi la state
+    state la du lieu duoc su dung de hien thi tren giao dien, khi state thay doi thi giao dien se duoc cap nhat lai de phu hop voi state moi
+     *@
+    int countLike = 20;
+    void TangGiam(int i){
+        countLike += i;
+    }
+}

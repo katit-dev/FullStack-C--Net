@@ -1,0 +1,45 @@
+﻿@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+@* <h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+} *@
+
+
+<div class="card col-5">
+    <img src="https://piscum.photos/200/300" alt="" width="100%">
+    <div class="card-body">
+        <h4 class="card-title">Jessica</h4>
+        <p class="card-text">Software Engineer</p>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-info" @onclick="()=>TangGiam(-1)">-</button>
+        @count
+        <button class="btn btn-danger" @onclick="()=>TangGiam(1)">+</button>
+    </div>
+
+</div>
+
+@code {
+    // state: du lieu cua component, thay doi se render lai giao dien
+    // thay doi du lieu trong state duoc goi la two-way data binding
+    
+    int count = 20;
+
+    void Tang() => count ++;
+    void Giam() => count --;
+
+    void TangGiam(int i) => count += i;
+}

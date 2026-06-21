@@ -1,0 +1,22 @@
+@page "/bt-giohang"
+
+<div class="container">
+    <h3>Bai Tap Gio Hang</h3>
+    <div class="row">
+        
+            @foreach(ProductCartViewModel prod in ArrProductDefault.arrProduct)
+            {
+                <div class="col-3">
+                    <SanPham prod="@prod" />
+                </div>
+            }
+    </div>
+
+    <GioHang />
+
+</div>
+
+
+@code{
+    
+}

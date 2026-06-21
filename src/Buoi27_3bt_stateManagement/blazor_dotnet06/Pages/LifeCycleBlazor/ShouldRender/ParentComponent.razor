@@ -1,0 +1,53 @@
+@page "/parent"
+
+<div class="container">
+    <h3>Demo ShouldRender - Child Component</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Static Card</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Fixed Information</p>
+                    <p class="text-muted">This is a static card that does not change</p>
+                    <button class="btn btn-outline-primary btn-sm">Learn More</button>
+                    <hr>
+                    <small class="text-muted">cybersoft notify (1)</small>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-warning btn-sm" @onclick="changeNumber">Render parent (@number)</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <ChildComponent listNotify="@lstNotifi" />
+        </div>
+    </div>
+    <br />
+
+    <button class="btn btn-dark" @onclick="addItem">Add item</button>
+
+
+</div>
+
+@code {
+
+    public int number { get; set; } = 1;
+    public List<string> lstNotifi = new List<string>() { "item1","item2","item3"};
+
+
+    public async Task addItem() {
+        lstNotifi.Add(@$"item {lstNotifi.Count}");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+    public async Task changeNumber()
+    {
+        number += 1;
+    }
+
+
+}

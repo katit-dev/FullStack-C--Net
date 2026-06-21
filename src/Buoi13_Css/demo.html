@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .flex-demo {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .border-box-demo {
+            width: 200px;
+            height: 200px;
+            border: 4px solid black;
+            padding: 5px 20px; /*5px cho tren duoi, 20px cho trai phai */
+            /* khoang cach tu noi dung den duong vien*/
+            padding: 5px 20px 5px; /*5px cho tren, 20px cho trai phai, 5px cho duoi*/
+            padding: 5px 20px 5px 20px; /*5px cho tren, 20px cho trai, 5px cho duoi, 20px cho phai*/
+            margin: 20px;
+            /* khonag cach tu vien toi cac phan tu ben ngoai */
+        }
+    </style>
+    <!-- space-between: c -->
+</head>
+
+<body>
+
+    <!-- the inline: không xuống dòng, chỉ chiếm diện tích của nội dung, không thể chỉnh sửa chiều rộng và chiều cao -->
+    <span style="background-color: black; width: 200px; height: 200px;"> the inline</span>
+    <br>
+
+    <!-- the block: xuống dòng, chiếm toàn bộ chiều rộng, có thể chỉnh sửa chiều rộng và chiều cao -->
+    <p style="background-color: red; width: 200px; height: 200px;"> the block</p>
+
+    <!-- inline block: có thể chỉnh sửa chiều rộng và chiều cao, nhưng không xuống dòng -->
+    <span style="background-color: blue; width: 200px; height: 200px; display: inline-block;"> the inline block</span>
+
+    <div class="flex-demo">
+        <p>the 1</p>
+        <p>the 2</p>
+    </div>
+
+
+    <!-- border box: 1  phần tử html gồm 4 phần
+    - Nội dung(content)
+    - padding: khoảng cách giữa nội dung và border
+    - border: đường viền bao quanh phần tử
+    - margin: khoảng cách giữa phần tử và phần tử khác 
+    -->
+
+    <p class="border-box-demo">Nội dung</p>
+    <p class="border-box-demo">Nội dung2</p>
+
+
+
+    <div class="boxdemo" style="width: 100px; height: 100px; background-color: red; border: 2px solid black;"></div>
+
+    <div class="box-demo">hihi</div>
+    <!-- grid: là hệ thống chia layout dạng lướt theo column và row -->
+
+    <br> <br> <br> <br> <br> <br>
+    <div class="grid-container">
+        <div style="background-color: red;" class="grid-item1">1</div>
+        <div style="background-color: blue;" class="grid-item">2</div>
+        <div style="background-color: green;" class="grid-item">3</div>
+        <div style="background-color: yellow;" class="grid-item">4</div>
+        <div style="background-color: purple;" class="grid-item">5</div>
+        <div style="background-color: orange;" class="grid-item">6</div>
+    </div>
+
+    div.
+
+    <link rel="stylesheet" href="css/demo.css">
+    <link rel="stylesheet" href="css/Style.css">
+</body>
+
+</html>

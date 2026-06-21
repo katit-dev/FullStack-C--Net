@@ -1,0 +1,21 @@
+
+
+<p>Child component</p>
+@ChildContent
+
+
+
+@* goi component con ở component cha truyền h3 vào
+==> cũng là 1 dạng truyền dữ liệu
+==> RenderFragment: 1 kiểu dữ liệu đặc biệt dùng để truyền nội dung HTML vào component con
+
+- cách để truyền:
+    + tạo 1 tham số kiểu RenderFragment trong component con
+    + sau đó khi gọi component con ở component cha thì truyền nội dung HTML vào tham số đó
+    + trong component con thì gọi @ChildContent để hiển thị nội dung HTML đã truyền vào
+ *@
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

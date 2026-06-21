@@ -1,0 +1,82 @@
+@page "/twoway"
+@using System.ComponentModel.DataAnnotations
+<PageTitle>Two way data binding</PageTitle>
+
+@* <input type="text" class="form-control" placeholder="Hãy nhập nội dung" @bind="content" />
+
+@content *@
+
+<div class="container">
+    <div class="row">
+        <h4>Register</h4>
+        <div class="col-6">
+            <EditForm Model="@model">
+                <DataAnnotationsValidator />
+
+                <div class="mb-3">
+                    <label for="" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="Name" id="Name" @bind="model.Name" />
+                    <ValidationMessage For="@(() => model.Name)" />
+                
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Email</label>
+                    <input type="text" class="form-control" name="Email" id="Email" @bind="model.Email" />
+                    <ValidationMessage For="@(() => model.Email)" />
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Phone</label>
+                    <input type="text" class="form-control" name="Phone" id="Phone" @bind="model.Phone" />
+                    <ValidationMessage For="@(() => model.Phone)" />    
+                </div>
+
+                @* Gender *@
+                <div class="form-group my-2">
+                    <label>Gender</label>
+
+                    <InputRadioGroup @bind-Value="model.Gender">
+                        <InputRadio Value="true" /> Male
+                        <InputRadio Value="false" /> Female
+                    </InputRadioGroup>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+    
+            </EditForm>
+        </div>
+        <div class="col-6">
+            <h4>Thông tin vừa nhập</h4>
+            <p>Name: @model.Name</p>
+            <p>Email: @model.Email</p>
+            <p>Phone: @model.Phone</p>
+            <p>Gender: @(model.Gender ? "Male" : "Female")</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+@code
+{
+    public string content { get; set; } = "Hello World";
+
+    class RegisterModel
+    {
+        [EmailAddress(ErrorMessage = "Invalid email format")]
+        [Required(ErrorMessage = "Email is required")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        public string Name { get; set; }
+
+        [MinLength(10, ErrorMessage = "Phone number must be at least 10 characters")]
+        [Required(ErrorMessage = "Phone is required")]
+        public string Phone { get; set; }
+        public bool Gender { get; set; }
+        @* public string Hobby { get; set; } *@
+    }
+
+    // tao 1 model de bind du lieu
+    RegisterModel model = new RegisterModel();
+}

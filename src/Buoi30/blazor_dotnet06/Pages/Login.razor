@@ -1,0 +1,75 @@
+@page "/login"
+@inject JwtAuthService _jwtService
+
+@using Blazored.LocalStorage
+@inject ILocalStorageService _localStorage
+
+<div class="container">
+    <h3 class="text-center mb-4">Đăng nhập</h3>
+
+    <div class="login-container">
+        <EditForm Model="@loginModel" OnValidSubmit="@HandleLogin">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <InputText class="form-control" @bind-Value="loginModel.Username" placeholder="Nhập username" />
+                <ValidationMessage For="@(() => loginModel.Username)" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <InputText type="password" class="form-control" @bind-Value="loginModel.Password"
+                           placeholder="Nhập password" />
+                <ValidationMessage For="@(() => loginModel.Password)" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Role</label>
+                <InputSelect class="form-select" @bind-Value="loginModel.Role">
+                    <option value="">-- Chọn role --</option>
+                    <option value="Admin">Admin</option>
+                    <option value="User">User</option>
+                    <option value="Manager">Manager</option>
+                </InputSelect>
+                <ValidationMessage For="@(() => loginModel.Role)" />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                Đăng nhập
+            </button>
+        </EditForm>
+
+        @if (!string.IsNullOrEmpty(message))
+        {
+            <div class="alert alert-info mt-3">
+                @message
+            </div>
+        }
+    </div>
+</div>
+
+
+@code {
+    private UserLoginViewModel loginModel = new();
+    private string message = string.Empty;
+
+    private void HandleLogin()
+    {
+        message = $"Đăng nhập với Username: {loginModel.Username}, Role: {loginModel.Role}";
+        if (loginModel.Username == "cybersoft" && loginModel.Password == "cybersoft")
+        {
+            string token = _jwtService.GenerateToken(loginModel.Username, loginModel.Role);
+            Console.WriteLine($"token: {token}");
+
+            // luu token vao browser(cookie, localstorage)
+            // chay js
+            _localStorage.SetItemAsync("accessToken", token);
+
+        }
+
+       
+
+    }
+}

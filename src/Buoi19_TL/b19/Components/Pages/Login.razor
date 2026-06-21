@@ -1,0 +1,36 @@
+@* gắn router *@
+@page "/login"
+
+@* 1 trang co the co nhieu router *@
+@page "/dang-nhap"
+
+@* đổi tiêu đề trang dùng <PageTitle> *@
+<PageTitle>Login</PageTitle>
+
+<div class="container">
+    <div class="mb-3">
+        <label for="" class="form-label">@LabelEmail</label>
+        <input type="email" class="form-control" name="" id="" aria-describedby="emailHelpId"
+               placeholder="abc@mail.com" />
+        <small id="emailHelpId" class="form-text text-muted">Help text</small>
+    </div>
+    <div class="bs5-form-password">
+        <label for="" class="form-label">@LabelPassword</label>
+        <input type="password" class="form-control" name="" id="" aria-describedby="passwordHelpId"
+               placeholder="••••••••" />
+        <small id="passwordHelpId" class="form-text text-muted">Help text</small>
+    </div>
+    <button class="btn btn-primary" @onclick="DoiChu">Submit</button>
+    
+</div>
+
+@code {
+    public string LabelEmail { get; set; } = "Input email here";
+    public string LabelPassword { get; set; } = "Input password here";
+
+    public void DoiChu()
+    {
+        LabelEmail = "Nhập email vào đây";
+        LabelPassword = "Nhập mật khẩu vào đây";
+    }
+}

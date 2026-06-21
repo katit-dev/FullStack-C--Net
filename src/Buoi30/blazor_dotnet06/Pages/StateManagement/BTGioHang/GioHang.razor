@@ -1,0 +1,62 @@
+@inject CartService _cartService
+@implements IDisposable
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in _cartService.lstProd)
+        {
+            string total = (item.price * item.quantity).ToString("N0") + " VND";
+            <tr>
+                <td>@item.Id</td>
+                <td>
+                    <img src="@item.image" width="20%" alt="">
+                </td>
+                <td>@item.name</td>
+                <td>@item.price.ToString("N0") VND</td>
+                <td>@item.quantity</td>
+                <td>
+                    <button class="btn btn-primary mx-2" @onclick="() => HandleUpdateQuantity(item.Id, 1)">+</button>
+                    @item.quantity
+                    <button class="btn btn-primary mx-2" @onclick="() => HandleUpdateQuantity(item.Id, -1)">-</button>
+                </td>
+                <td>@total</td>
+                <td>
+                    <button class="btn btn-danger" @onclick="() => HandleRemoveItem(item.Id)">Delete</button>
+                </td>
+            </tr>
+        }
+        
+    </tbody>
+</table>
+
+@code{
+    public async Task HandleUpdateQuantity(int id, int quantity){
+        await _cartService.UpdateQuantity(id, quantity);
+    }
+
+    public async Task HandleRemoveItem(int id){
+        await _cartService.RemoveItem(id);
+    }
+
+     protected override async Task OnInitializedAsync()
+    {
+        _cartService.OnChange += StateHasChanged;
+    }
+
+    
+
+    public void Dispose()
+    {
+        _cartService.OnChange -= StateHasChanged;
+    }
+}

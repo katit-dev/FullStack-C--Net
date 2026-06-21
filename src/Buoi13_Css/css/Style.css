@@ -1,0 +1,563 @@
+:root{
+    /* khai bao bien bang 2 dau gach noi */
+    --main-color: #e62b4a;
+    /* bien toan cuc */
+}
+
+
+/* Global  */
+
+html{
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.title {
+    text-align: center;
+    --text-white: white;
+    /* biến này sẽ được các thẻ con
+    chứa trong title sử dụng để định nghĩa màu trắng cho văn bản
+    */
+}
+
+.title p:first-child {
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--main-color);
+    
+}
+
+.title h2{
+    
+    font-size: 40px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.title p:last-child {
+    /* dinh nghia mau cho p cuoi cung */
+    --gray-color: gray;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--gray-color);
+    /* bien cục bộ, chỉ áp dụng cho phần tử này */
+
+}
+
+/* Header styles */
+.header {
+    color: white;
+
+    position: absolute;
+    /* lam cho header mat dien tich*/
+    width: 100%;
+    border-bottom: 1px solid gray;
+}
+
+.header-content {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+/* viet selector */
+/* Cac thẻ li nằm bên trong thẻ có class là header-content */
+.header-content li {
+    display: inline;
+    margin: 0 5px
+}
+
+.header-content .logo {
+    color: white;
+}
+
+.header-content li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    transition: color 0.5s ease;
+}
+
+/* đổi màu thẻ a */
+.header-content li a:hover {
+    color: red;
+}
+
+.header-content li a:active {
+    color: red;
+}
+
+/* Carousel styles */
+
+.carousel {
+    background-image: url(./../images/home_slider.jpg);
+    /* background repeat */
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* cover: hình sẽ được phóng to hoặc thu nhỏ để phủ kín toàn bộ phần tử
+    có thể bị cắt bớt nếu tỉ lệ của hình không khớp với tỉ lệ của phần tử.
+     contain: hình sẽ được phóng to hoặc thu nhỏ để vừa vặn bên trong phần tử.
+     Nhưng sẽ không bị cắt bớt, có thể có khoảng trống nếu tỉ lệ của hình không khớp với tỉ lệ của phần tử.
+    auto: hình sẽ giữ nguyên kích thước gốc của nó, không bị phóng to hoặc thu nhỏ. 
+    100% 100%: hình sẽ được phóng to hoặc thu nhỏ để vừa vặn bên trong phần tử, 
+    nhưng sẽ bị biến dạng nếu tỉ lệ của hình không khớp với tỉ lệ của phần tử.
+    
+    */
+    background-position: center;
+    /* background position: chỉnh vị trí hiện thị của hình nền */
+    
+    /* background: url(./../images/home_slider.jpg) no-repeat center center / cover */
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-content {
+    text-align: center;
+}
+
+.carousel-content h1 {
+    color: white;
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.carousel-content p {
+    color: white;
+    font-size: 70px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.carousel-content button {
+    color: white;
+    background-color: red;
+    text-transform: uppercase;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.carousel-content button:hover {
+    background-color: af2239;
+    transition: all 0.5s ease;
+}
+
+.carousel-content .icon-down {
+    padding-top: 20px;
+    animation: downArrow 1s infinite;
+}
+
+.carousel-content .icon-down i {
+    color: white;
+    font-size: 20px;
+}
+
+/* chuyen dong icon */
+@keyframes downArrow {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+}
+
+/* .boxdemo {
+    animation: moveSquare 4s linear infinite;
+} */
+
+@keyframes moveSquare {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(200px, 0);
+    }
+
+    50% {
+        transform: translate(200px, 200px);
+    }
+
+    75% {
+        transform: translate(0, 200px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+
+/* Services styles */
+.service {
+    background-color: black;
+    color: white;
+}
+
+.service .service-content {
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+
+.service .list-slider{
+    display: flex;
+    justify-content: space-between;
+}
+
+.service .list-slider .item {
+    width: 150px;
+    height: 200px;
+    background-color: white;
+    color: gray;
+    text-align: center;
+    padding: 30px 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* để after bên trong nhận item làm cha
+    và căn theo item
+    Nếu không để sẽ căn theo body và không đúng vị trí mong muốn
+    */
+    position: relative;
+
+    margin: 10px;
+}
+
+.service .service-content{
+    width: 80%;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+.service .list-slider .item::after{
+    content: "";
+    width: 4px;
+    height: 0;
+    background-color: red;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.service .list-slider .item:hover::after{
+    height: 100%;
+    transition: all 0.5s ease;
+
+}
+
+.box-demo::before{
+    content: "Hello";
+}
+
+.box-demo::after{
+    content: "World";
+}
+
+.service .list-slider .slick-dots li button::before{
+   color: white;
+   font-size: 12px;
+}
+
+/* Blog styles */
+.blogs{
+
+}
+
+.blogs .blog-content{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.blogs .blog-content .title p:first-child {
+    color: gray;
+
+    
+}
+
+.blogs .blog-content .list-blog img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right;
+    filter:grayscale(0.5);
+   
+}
+
+.blogs .blog-content .list-blog{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.blogs .blog-content .list-blog .item:first-child{
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+}
+
+.blogs .blog-content .list-blog .item:last-child{
+    grid-column: 3 / 5;
+    grid-row: 3 / 5;
+}
+
+
+.blogs .blog-content .list-blog .item{
+    position: relative;
+}
+
+.blogs .blog-content .list-blog .item-overlay{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    opacity: 0;
+}
+
+.blogs .blog-content .list-blog .item:hover .item-overlay{
+    opacity: 0.5;
+    transition: all 0.5s ease;
+}
+
+.blogs .blog-content .list-blog .item-overlay .icon-show{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: white;
+    color: black;
+    transform: translateY(20px);
+    /* truoc khi hover -> se bi day xuong 20px
+    ==> không nhìn thấy icon
+    sau khi hover -> se trở về vị trí ban đầu
+    */
+   
+}
+
+.blogs .blog-content .list-blog .item-overlay .text-bottom{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    transform: translateY(20px);
+    /* truoc khi hover -> se bi day xuong 20px
+    ==> không nhìn thấy text
+    sau khi hover -> se trở về vị trí ban đầu
+    */
+
+}
+
+.blogs .blog-content .list-blog .item:hover .icon-show,
+.blogs .blog-content .list-blog .item:hover .text-bottom{
+    transform: translateY(0);
+    transition: all 0.5s ease;
+}
+
+/* Number styles */
+.number{
+    /* nen den cho phan number */
+    background-color: black;
+    color: white;
+    margin-top: 100px;
+}
+
+.number .number-content{
+    width: 80%;
+    margin: 0 auto;
+    /* tang chieu rong ben trong thi dung padding */
+    padding: 50px 0;
+    display: flex;
+    justify-content: space-around;
+
+    
+}
+
+.number .number-content .number-item{
+    text-align: center;
+}
+
+.number .number-content .number-item p:first-child{
+    font-size: 50px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.number .number-content .number-item p:last-child{
+    color: gray;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* EXPERIENCE */
+.experience{
+    padding: 100px 0;
+    background-image: url(./../images/bussiness_img_1.jpg);
+    background-repeat: no-repeat;
+    /* de khong bi khoang trang */
+    background-size: cover;
+    background-position: center;
+    /* background-position: center; dung de canh giua */
+
+    background-attachment: fixed;
+    /* dung de khi cuon trang thi hinh nen khong di chuyen */
+}
+
+.experience .experience-content{
+    
+}
+
+.experience .experience-content .title h2{
+    color: white;
+}
+
+.experience .experience-video video{
+    width: 100%;
+    
+}
+
+/* contact */
+.contact{
+
+}
+.contact .contact-content {
+    width: 80%;
+    margin: 0 auto;
+    padding: 100px 0;
+}
+.contact .contact-content .title {
+}
+.contact .contact-content .map-form {
+    display: flex;
+}
+.contact .contact-content .map {
+    width: 60%;
+}
+.contact .contact-content .form {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: space-around;
+    width: 40%;
+}
+
+.contact .contact-content .form input,
+.contact .contact-content .form textarea {
+    padding: 10px 20px;
+}
+
+.contact .contact-content .form button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.contact .contact-content .form button:hover {
+    /* filter: invert(); */
+    /* filter invert() dung de dao nguoc mau sac */
+
+    background-color: #e62b4a;
+    border-color: #e62b4a;
+    transition: all 0.5s ease;
+}
+
+/* Footer */
+.footer{
+    background:black;
+    padding:80px 0;
+}
+
+.footer-content{
+    width:80%;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.footer .text{
+    color:#aaa;
+    font-size:14px;
+}
+
+.logos a{
+    /* vi the inline khong chinh duoc width va heigh
+    ==> doi thanh display: inline-block
+    */
+    width:50px;
+    height:50px;
+    background:#2b2b2b;
+    border-radius:50%;
+
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-left:10px;
+    /* de cac item cach xa nhau */
+
+    color:white;
+    font-size:18px;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.logos a:hover{
+    background:#e62b4a;
+}
+
+/* Back to top */
+.back-t {
+    background-color: gray;
+    color:white;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    /* line-height dung de canh giua noi dung theo chieu doc */
+
+    position: fixed;
+    /* position: fixed dung de */
+    bottom: 20px;
+    right: 20px;
+
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+
+
+}
+
+/* the co class la back-t va show */
+.back-t.show {
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+
+.back-t a{
+    color: white;
+}

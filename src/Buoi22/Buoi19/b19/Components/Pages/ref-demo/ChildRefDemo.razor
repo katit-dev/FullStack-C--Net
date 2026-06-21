@@ -1,0 +1,13 @@
+<p>Số hiện tại: @soHienTai</p>
+
+@code{
+    public int soHienTai { get; set; } = 0;
+}
+
+@code{
+public void TangGiam(int so)
+{
+    soHienTai += so;
+    StateHasChanged();
+}
+}

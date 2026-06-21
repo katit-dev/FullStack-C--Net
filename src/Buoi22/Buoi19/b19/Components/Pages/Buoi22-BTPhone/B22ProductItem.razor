@@ -1,0 +1,32 @@
+<div class="col-4">
+    <div class="card text-start">
+        <img class="card-img-top" src="@sp.HinhAnh" alt="@sp.TenSp" />
+        <div class="card-body">
+            <h4 class="card-title">@sp.TenSp</h4>
+            <p class="card-text">@sp.GiaBan</p>
+        </div>
+        <div class="card-footer d-flex">
+            <button class="btn btn-info">Xem chi tiet</button>
+            <button class="btn btn-primary" @onclick="ThemGioHang">Them gio hang</button>
+        </div>
+
+    </div>
+    
+
+@* button them gioHang *@
+</div>
+
+
+
+@code{
+    [Parameter]
+    public PhoneCartVM sp { get; set; }
+
+    [Parameter]
+    public EventCallback<PhoneCartVM> themGioHang { get; set; }
+
+    void ThemGioHang()
+    {
+        themGioHang.InvokeAsync(sp);
+    }
+}

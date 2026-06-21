@@ -1,0 +1,51 @@
+@page "/product-list"
+@using b19.Models
+<PageTitle>Product List</PageTitle>
+
+@* dung foreach de hien thi danh sach san pham *@
+
+@*ProductList la component cha
+ProductCard la component con
+
+trong foreach, moi san pham la 1 component con 
+va component con nhan vao 1 object la san pham do de hien thi thong tin
+*@
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in lst)
+        {
+            <ProductCard sanPham="@item" themVaoGioHang="AddToCart"/>
+        }
+    </div>
+
+    <h3>Shopping Cart (@cart.Count)</h3>
+    @foreach(var item in cart)
+    {
+        <p>@item.Name - @item.Price.ToString("C")</p>
+    }
+</div>
+
+@code{
+
+    // tao 1 list san pham
+    List<ProductCardVM> lst = new List<ProductCardVM>
+    {
+        new ProductCardVM {Name = "iPhone 12", Price = 999, Image = "https://tpmobile.vn/wp-content/uploads/2022/07/iphone-12-64gb-quoc-te-like-new-99.png", Description =
+        "The latest iPhone with A14 Bionic chip." },
+        new ProductCardVM {Name = "Samsung Galaxy S21", Price = 899, Image = "https://tpmobile.vn/wp-content/uploads/2022/07/iphone-12-64gb-quoc-te-like-new-99.png",
+        Description = "The latest Samsung phone with Exynos 2100." },
+        new ProductCardVM { Name = "Google Pixel 5", Price = 699, Image = "https://tpmobile.vn/wp-content/uploads/2022/07/iphone-12-64gb-quoc-te-like-new-99.png",
+        Description = "Google's flagship phone with pure Android experience." }
+    };
+
+
+    @* tao ra 1 gio hang(1 list cac san pham) *@
+    List<ProductCardVM> cart = new List<ProductCardVM>();
+
+    public void AddToCart(ProductCardVM sanPham)
+    {
+        cart.Add(sanPham);
+    }
+
+}

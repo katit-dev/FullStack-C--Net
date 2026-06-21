@@ -1,0 +1,68 @@
+@page "/state-management"
+@inject NumberService numberService
+@inject CarService carService
+
+@implements IDisposable
+
+<div class="container">
+    <h3>State Management Demo</h3>
+    <h3 class="alert alert-warning">Tang giam so luong</h3>
+    <button class="btn btn-dark me-2" @onclick="() => handleChangeNumber(-1)" >-</button>
+    <h3 class="d-inline-block">@numberService.number</h3>
+    <button class="btn btn-dark me-2" @onclick="() => handleChangeNumber(1)" >+</button>
+
+    <hr />
+<h3 class="alert alert-warning">Change car color</h3>
+
+<div class="row">
+        <div class="col-4">
+            <img class="w-100" src="@carService.CarImage" alt="car" />
+        </div>
+
+        <div class="col-md-8">
+            <button class="btn btn-dark me-2"
+                    @onclick='() => HandleChangeCar("/img/black-car.jpg")'>
+                Black car
+            </button>
+
+            <button class="btn btn-danger me-2"
+                    @onclick='() => HandleChangeCar("/img/red-car.jpg")'>
+                Red car
+            </button>
+
+            <button class="btn btn-secondary me-2"
+                    @onclick='() => HandleChangeCar("/img/silver-car.jpg")'>
+                Silver car
+            </button>
+        </div>
+    </div>
+
+
+</div>
+
+
+@code {
+    public async Task handleChangeNumber(int value)
+    {
+        await numberService.changeNumber(value);
+    }
+
+    public async Task HandleChangeCar(string imagePath)
+    {
+        await carService.ChangeCar(imagePath);
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        numberService.OnChange += StateHasChanged;
+        carService.OnChange += StateHasChanged;
+
+        return Task.CompletedTask;
+    }
+
+    public void Dispose()
+    {
+        numberService.OnChange -= StateHasChanged;
+        carService.OnChange -= StateHasChanged;
+    }
+}

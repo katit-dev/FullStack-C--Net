@@ -1,0 +1,12 @@
+
+
+<div class="container">
+    <p>this is child page</p>
+    @ChildContent
+
+</div>
+
+@code{
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}
