@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using backend_netcore_dotnet06.Helper;
-using backend_netcore_dotnet06.Models.DBUser;
 using Microsoft.AspNetCore.Mvc;
 //using backend_netcore_dotnet06.Models;
 
@@ -21,10 +19,9 @@ namespace backend_netcore_dotnet06.Controllers
             new UserDTO(){Id = 3, Name = "User 3", Email = "email3@example.com", Password = "password3"}
         };
 
-        private readonly UserDBContext _context;
-        public UserController(UserDBContext context)
+
+        public UserController()
         {
-            _context = context;
         }
 
 
@@ -90,57 +87,6 @@ namespace backend_netcore_dotnet06.Controllers
             return lstUsersDTO;       
         }
 
-        [HttpPost("register")]
-public async Task<IActionResult> Register([FromBody] UserRegisterDTO model)
-{
-    // Kiểm tra username và email có tồn tại hay không
-    var user = _context.Users.SingleOrDefault(item =>
-        item.Username == model.Username || item.Email == model.Email);
-
-    if (user != null)
-    {
-        var res = new
-        {
-            message = "Tài khoản hoặc email đã được đăng ký !",
-            status = 408
-        };
-
-        return StatusCode(408, res);
-    }
-
-    // Mặc định có 1 role -> User
-    // Lưu ý: 1 nghiệp vụ chỉ savechange 1 lần
-    // UserInsert:
-
-    User newUser = new User();
-    newUser.Email = model.Email;
-    newUser.Phone = model.Phone;
-    newUser.Deleted = false;
-    newUser.Username = model.Username;
-    newUser.HashPassword = HelperFunction.HashPassword(model.Password);
-
-    UserRole usRole = new UserRole();
-    usRole.IdUser = newUser.Id;
-    usRole.IdRole = CRole.User;
-
-    newUser.UserRoles.Add(usRole);
-
-    await _context.Users.AddAsync(newUser);
-    await _context.SaveChangesAsync();
-
-    // try
-    // {
-    //     _context.Database.BeginTransaction();
-    //
-    //     _context.Database.CommitTransaction();
-    // }
-    // catch (Exception ex)
-    // {
-    //     _context.Database.RollBackTransaction();
-    // }
-
-    return Ok("Đăng ký thành công !");
-}
 
         
     }
