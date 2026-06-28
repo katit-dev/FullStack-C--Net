@@ -87,62 +87,61 @@ namespace backend_netcore_dotnet06.Controllers
             {
                 existingUser.Password = newPassword;
             }
-            return lstUsersDTO;       
+            return lstUsersDTO;
         }
 
         [HttpPost("register")]
-public async Task<IActionResult> Register([FromBody] UserRegisterDTO model)
-{
-    // Kiểm tra username và email có tồn tại hay không
-    var user = _context.Users.SingleOrDefault(item =>
-        item.Username == model.Username || item.Email == model.Email);
-
-    if (user != null)
-    {
-        var res = new
+        public async Task<IActionResult> Register([FromBody] UserRegisterDTO model)
         {
-            message = "Tài khoản hoặc email đã được đăng ký !",
-            status = 408
-        };
+            // Kiểm tra username và email có tồn tại hay không
+           var user = _context.Users.SingleOrDefault(item => item.Username == model.Username || item.Email == model.Email);
+           if(user!= null)
+            {
+                var res = new
+                {
+                    message = "Tai khoan hoac email da ton tai",
+                    status = 408
+                };
+                return StatusCode(408, res);
+            }
 
-        return StatusCode(408, res);
-    }
+            // neu khong ton tai thi tao moi user
+            User newUser = new User();
+            newUser.Email = model.Email;
+            newUser.Phone = model.Phone;
+            newUser.Deleted = false;
+            newUser.Username = model.Username;
+            newUser.HashPassword = HelperFunction.HashPassword(model.Password);
 
-    // Mặc định có 1 role -> User
-    // Lưu ý: 1 nghiệp vụ chỉ savechange 1 lần
-    // UserInsert:
+            // tao moi user role
+            UserRole newUserRole = new UserRole();
+            newUserRole.IdUser = newUser.Id;
+            newUserRole.IdRole = CRole.User;
 
-    User newUser = new User();
-    newUser.Email = model.Email;
-    newUser.Phone = model.Phone;
-    newUser.Deleted = false;
-    newUser.Username = model.Username;
-    newUser.HashPassword = HelperFunction.HashPassword(model.Password);
+            // add userrole vao user
+            newUser.UserRoles.Add(newUserRole);
 
-    UserRole usRole = new UserRole();
-    usRole.IdUser = newUser.Id;
-    usRole.IdRole = CRole.User;
+            // add user vao dbcontext
+            await _context.Users.AddAsync(newUser);
 
-    newUser.UserRoles.Add(usRole);
+            // save changes vao db
+            await _context.SaveChangesAsync();
 
-    await _context.Users.AddAsync(newUser);
-    await _context.SaveChangesAsync();
+            // try
+            // {
+            //     _context.Database.BeginTransaction();
+            //
+            //     _context.Database.CommitTransaction();
+            // }
+            // catch (Exception ex)
+            // {
+            //     _context.Database.RollBackTransaction();
+            // }
 
-    // try
-    // {
-    //     _context.Database.BeginTransaction();
-    //
-    //     _context.Database.CommitTransaction();
-    // }
-    // catch (Exception ex)
-    // {
-    //     _context.Database.RollBackTransaction();
-    // }
+            return Ok("Đăng ký thành công !");
+        }
 
-    return Ok("Đăng ký thành công !");
-}
 
-        
     }
 
 }
