@@ -149,8 +149,23 @@ namespace backend_netcore_dotnet06.Controllers
         public async Task<IActionResult> Login([FromBody] UserLoginDTO user)
         {
             // check login thanh cong thi tao token
-            
+            User? useCheckLogin = _context.Users.SingleOrDefault(item => item.Username == user.UserOrEmailOrPhone || item.Email == user.UserOrEmailOrPhone || item.Phone == user.UserOrEmailOrPhone);
+            if (useCheckLogin == null)
+            {
+                return BadRequest("Sai tên đăng nhập");
+            }
+            // kiem tra password
+            if (!HelperFunction.VerifyPassword(user.Password, useCheckLogin.HashPassword))
+            {
+                return BadRequest("Sai mật khẩu");
+            }
+
+            // neu dung thi tao token
+            string token = _jwt.GenerateToken(user);
+            return Ok(token );
         }
+
+
     }
 
 }

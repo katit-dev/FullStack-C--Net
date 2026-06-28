@@ -12,7 +12,7 @@ public class JwtAuthService
     private readonly UserDBContext _context;
     public JwtAuthService(IConfiguration Configuration, UserDBContext db)
     {
-        _key = Configuration["jwt:Serect-Key"];
+        _key = Configuration["jwt:Key"];
         _issuer = Configuration["jwt:Issuer"];
         _audience = Configuration["jwt:Audience"];
         _context = db;
