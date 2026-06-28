@@ -111,12 +111,14 @@ namespace backend_netcore_dotnet06.Controllers
             newUser.Phone = model.Phone;
             newUser.Deleted = false;
             newUser.Username = model.Username;
+            newUser.Fullname = model.FullName;
             newUser.HashPassword = HelperFunction.HashPassword(model.Password);
 
             // tao moi user role
             UserRole newUserRole = new UserRole();
             newUserRole.IdUser = newUser.Id;
             newUserRole.IdRole = CRole.User;
+            newUserRole.Desc = "set vai tro thong qua view dang ky";
 
             // add userrole vao user
             newUser.UserRoles.Add(newUserRole);

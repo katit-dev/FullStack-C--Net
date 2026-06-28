@@ -17,4 +17,6 @@ public class UserRegisterDTO
     [Required(ErrorMessage = "Số điện thoại không được để trống")]
     [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
     public string Phone { get; set; } = string.Empty;
+    
+    public string? FullName { get; set; } = string.Empty;
 }
