@@ -106,6 +106,8 @@ Encoding.UTF8.GetBytes(jwtKey)
 });
 builder.Services.AddAuthorization();
 
+// DI JwtService
+builder.Services.AddScoped<JwtAuthService>();
 
 var app = builder.Build();
 

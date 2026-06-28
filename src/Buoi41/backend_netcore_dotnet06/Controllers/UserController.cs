@@ -22,9 +22,11 @@ namespace backend_netcore_dotnet06.Controllers
         };
 
         private readonly UserDBContext _context;
-        public UserController(UserDBContext context)
+        private readonly JwtAuthService _jwt;
+        public UserController(UserDBContext context, JwtAuthService jwt)
         {
             _context = context;
+            _jwt = jwt;
         }
 
 
@@ -143,7 +145,12 @@ namespace backend_netcore_dotnet06.Controllers
             return Ok("Đăng ký thành công !");
         }
 
-
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserLoginDTO user)
+        {
+            // check login thanh cong thi tao token
+            
+        }
     }
 
 }

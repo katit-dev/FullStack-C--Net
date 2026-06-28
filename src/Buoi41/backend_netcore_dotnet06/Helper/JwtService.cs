@@ -36,10 +36,10 @@ public class JwtAuthService
             new Claim("Email", userModel.Email), // Claim cho email
         };
         // Đưa role vào vào token
-        List<UserRole> lstUserRole = _context.UserRoles.Where(item => item.IdUser == userModel.Id).ToList();
-        foreach (var userRole in lstUserRole)
+        var lstUserRole = _context.UserRoles.Where(item => item.IdUser == userModel.Id).Select(item => item.IdRoleNavigation.Rolename).ToList();
+        foreach (var item in lstUserRole)
         {
-            claims.Add(new Claim(ClaimTypes.Role, userRole.IdRoleNavigation.Rolename));
+            claims.Add(new Claim(ClaimTypes.Role, item));
         }
 
 
