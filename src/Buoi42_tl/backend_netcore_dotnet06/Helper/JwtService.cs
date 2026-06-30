@@ -53,7 +53,7 @@ public class JwtAuthService
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddMinutes(2), // Token hết hạn sau 1 giờ
+            Expires = DateTime.UtcNow.AddHours(1), // Token hết hạn sau 1 giờ
             SigningCredentials = credentials,
             Issuer = _issuer,                 // Thêm Issuer vào token
             Audience = _audience,              // Thêm Audience vào token
