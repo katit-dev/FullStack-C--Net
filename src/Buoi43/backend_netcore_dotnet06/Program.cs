@@ -155,6 +155,9 @@ builder.Services.AddScoped<LogFilter>();
 //Di filter ExceptionActionFilter
 builder.Services.AddScoped<ExceptionActionFilter>();
 
+// DI memory cache
+builder.Services.AddMemoryCache();
+
 
 
 var app = builder.Build();
