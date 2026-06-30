@@ -56,6 +56,25 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1",
         Description = "API documentation for .NET 10"
     });
+    // Khai báo scheme Bearer -> tạo nút "Authorize" + ô nhập token trong Swagger
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Nhập token JWT vào ô dưới đây"
+    });
+
+    // Áp scheme cho toàn bộ endpoint -> hiện icon ổ khóa và tự gắn header Authorization khi gọi API
+    options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecuritySchemeReference("Bearer", document),
+            new List<string>()
+        }
+    });
 });
 
 // DI CORS
