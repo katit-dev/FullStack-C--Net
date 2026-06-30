@@ -1,0 +1,2 @@
+ALTER TABLE IpCount
+    DROP CONSTRAINT UQ_IpCount_ip;

@@ -8,6 +8,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Models.Models;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
@@ -106,6 +107,17 @@ var jwtKey = builder.Configuration["Jwt:Key"];
 var issuer = builder.Configuration["Jwt:Issuer"];
 var audience = builder.Configuration["Jwt:Audience"];
 
+//DI custom middleware CountIpRequestMiddleware
+
+// builder.Services.AddTransient<CountIpRequestMiddleware>();
+
+// builder.Services.AddTransient<SubDomainMiddleware>();
+
+
+
+
+
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {
@@ -127,6 +139,23 @@ builder.Services.AddAuthorization();
 
 // DI JwtService
 builder.Services.AddScoped<JwtAuthService>();
+
+//DI serilog
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File("logs/app-.log", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+//Gắn Serilog vào pipeline logging -> ILogger<T> trong controller sẽ dùng Serilog (đọc từ Log.Logger ở trên)
+builder.Services.AddSerilog();
+
+//DI filter LogFilter
+builder.Services.AddScoped<LogFilter>();
+//Di filter ExceptionActionFilter
+builder.Services.AddScoped<ExceptionActionFilter>();
+
+
 
 var app = builder.Build();
 
