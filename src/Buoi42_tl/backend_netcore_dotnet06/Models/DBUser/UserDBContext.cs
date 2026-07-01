@@ -15,6 +15,8 @@ public partial class UserDBContext : DbContext
     {
     }
 
+    public virtual DbSet<IpCount> IpCounts { get; set; }
+
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
@@ -26,6 +28,22 @@ public partial class UserDBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<IpCount>(entity =>
+        {
+            entity.ToTable("IpCount");
+
+            entity.HasIndex(e => e.Ip, "UQ_IpCount_ip").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Count).HasColumnName("count");
+            entity.Property(e => e.DateRequest)
+                .HasColumnType("datetime")
+                .HasColumnName("dateRequest");
+            entity.Property(e => e.Ip)
+                .HasMaxLength(50)
+                .HasColumnName("ip");
+        });
+
         modelBuilder.Entity<Role>(entity =>
         {
             entity.HasIndex(e => e.Rolename, "UQ_Roles_rolename").IsUnique();
