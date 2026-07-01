@@ -30,6 +30,7 @@ namespace backend_netcore_dotnet06.Controllers
             _context = context;
             _mapper = mapper;
             _environment = environment;
+
         }
 
         [HttpGet("GetAllProducts")]
@@ -285,6 +286,8 @@ namespace backend_netcore_dotnet06.Controllers
 
             return Ok("ok");
         }
+
+        
 
     }
 

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend_netcore_dotnet06.Helper;
 using backend_netcore_dotnet06.Models.DBUser;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 //using backend_netcore_dotnet06.Models;
 
 namespace backend_netcore_dotnet06.Controllers
@@ -96,8 +98,8 @@ namespace backend_netcore_dotnet06.Controllers
         public async Task<IActionResult> Register([FromBody] UserRegisterDTO model)
         {
             // Kiểm tra username và email có tồn tại hay không
-           var user = _context.Users.SingleOrDefault(item => item.Username == model.Username || item.Email == model.Email);
-           if(user!= null)
+            var user = _context.Users.SingleOrDefault(item => item.Username == model.Username || item.Email == model.Email);
+            if (user != null)
             {
                 var res = new
                 {
@@ -162,10 +164,47 @@ namespace backend_netcore_dotnet06.Controllers
 
             // neu dung thi tao token
             string token = _jwt.GenerateToken(user);
-            return Ok(token );
+            return Ok(token);
         }
 
+        [HttpGet("GetUserProfile")]
+        [Authorize]
+        public async Task<IActionResult> GetUserProfile()
+        {
+            // Decode token tu HttpContext
+            bool valid = HttpContext.Request.Headers.TryGetValue("Authorization", out var token);
+            if (valid)
+            {
+                string tokenValue = token.ToString().Replace("Bearer ", "");
+
+                string username = _jwt.DecodePayloadToken(tokenValue);
+
+                // truy van vao bang user de tra Profile
+                var userResponse = await _context.Users.SingleOrDefaultAsync(item => item.Username == username);
+                if (userResponse != null)
+                {
+                    return StatusCode(200, new
+                    {
+                        message = "Lấy thông tin user thành công !",
+                        data = new
+                        {
+                            username = userResponse.Username,
+                            email = userResponse.Email,
+                            phone = userResponse.Phone,
+                            fullname = userResponse.Fullname
+                        }
+                    });
+                }
+                return StatusCode(404, new
+                {
+                    message = "Không tìm thấy thông tin user !"
+                });
+            }
+            return StatusCode(401, new
+            {
+                message = "Token không hợp lệ !"
+            });
+        }
 
     }
-
 }
