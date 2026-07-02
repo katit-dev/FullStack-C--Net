@@ -20,5 +20,19 @@ namespace backend_netcore_dotnet06.Controllers
 
             return Ok(res);
         }
+
+        [HttpGet("TestFilterNameAsync")]
+        [BlockIpAddressFilterAsync(IpAddress = "199.111.122.133")]
+        public async Task<ActionResult> TestFilterBlockIpAddressAsync([FromQuery] string model)
+        {
+            Console.WriteLine($"Action handler");
+
+            var res = new
+            {
+                Message = "Bạn đã đi qua filter BlockIpAddressAsync thành công!"
+            };
+
+            return Ok(res);
+        }
     }
 }
