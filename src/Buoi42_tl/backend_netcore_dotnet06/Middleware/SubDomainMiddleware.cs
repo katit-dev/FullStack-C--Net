@@ -20,7 +20,7 @@ namespace backend_netcore_dotnet06.Middleware
         {
             var hostNameClient = context.Request.Host.Host;
             // .host.host: host 1st la domain, host 2nd la subdomain
-
+            //
             Console.WriteLine($@"Ten mien client: {hostNameClient}");
             await next(context);
         }
