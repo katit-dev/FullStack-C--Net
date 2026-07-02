@@ -1,5 +1,6 @@
 using System.Text;
 using backend_netcore_dotnet06.Helper;
+using backend_netcore_dotnet06.Middleware;
 using backend_netcore_dotnet06.Models.DBQuanLyNhanVien;
 using backend_netcore_dotnet06.Models.DBUser;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -128,6 +129,9 @@ builder.Services.AddAuthorization();
 // DI JwtService
 builder.Services.AddScoped<JwtAuthService>();
 
+// DI custom middleware CountIpAddressMiddleware
+builder.Services.AddScoped<CountIpAddressMiddleware>();
+
 var app = builder.Build();
 
 //Nếu là localhost (môi trường dev mới có trang swagger)
@@ -175,6 +179,8 @@ app.UseStaticFiles(new StaticFileOptions
     ),
     RequestPath = "/files"
 });
+
+app.UseMiddleware<CountIpAddressMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
