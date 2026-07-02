@@ -132,6 +132,9 @@ builder.Services.AddScoped<JwtAuthService>();
 // DI custom middleware CountIpAddressMiddleware
 builder.Services.AddScoped<CountIpAddressMiddleware>();
 
+// DI custom middleware NameMiddleware
+builder.Services.AddScoped<NameMiddleware>();
+
 var app = builder.Build();
 
 //Nếu là localhost (môi trường dev mới có trang swagger)
@@ -181,6 +184,7 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseMiddleware<CountIpAddressMiddleware>();
+app.UseMiddleware<NameMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
