@@ -165,25 +165,25 @@ if (app.Environment.IsDevelopment())
 }
 
 // middleware exception handler
-app.UseExceptionHandler(errorApp =>
-{
-    errorApp.Run(async context =>
-    {
-        var request = context.Request;
-        var ipAddress = request.HttpContext.Connection.RemoteIpAddress?.ToString();
-        var userAgent = request.Headers["User-Agent"].ToString();
+// app.UseExceptionHandler(errorApp =>
+// {
+//     errorApp.Run(async context =>
+//     {
+//         var request = context.Request;
+//         var ipAddress = request.HttpContext.Connection.RemoteIpAddress?.ToString();
+//         var userAgent = request.Headers["User-Agent"].ToString();
 
-        var result = new
-        {
-            IsSuccess = false,
-            Message = "Co loi trong he thong",
-            IpAddress = ipAddress,
-            UserAgent = userAgent
-        };
+//         var result = new
+//         {
+//             IsSuccess = false,
+//             Message = "Co loi trong he thong",
+//             IpAddress = ipAddress,
+//             UserAgent = userAgent
+//         };
 
-        await context.Response.WriteAsJsonAsync(System.Text.Json.JsonSerializer.Serialize(result));
-    });
-});
+//         await context.Response.WriteAsJsonAsync(System.Text.Json.JsonSerializer.Serialize(result));
+//     });
+// });
 
 // su dung middleware CORS
 app.UseCors("AllowGetData");
