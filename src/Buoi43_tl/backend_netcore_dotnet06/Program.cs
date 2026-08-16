@@ -9,6 +9,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Models.Models;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
@@ -134,6 +135,20 @@ builder.Services.AddScoped<CountIpAddressMiddleware>();
 
 // DI custom middleware NameMiddleware
 builder.Services.AddScoped<NameMiddleware>();
+
+// DI Serilog
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File(
+        "logs/app-.log",
+        rollingInterval: RollingInterval.Day
+    )
+    .CreateLogger();
+
+// Gắn Serilog vào pipeline logging
+// ILogger<T> trong Controller sẽ sử dụng Serilog
+builder.Services.AddSerilog();
 
 var app = builder.Build();
 
