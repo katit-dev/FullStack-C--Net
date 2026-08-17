@@ -25,12 +25,18 @@ namespace backend_netcore_dotnet06.Controllers
             {
                 Message = "Bạn đã đi qua filter BlockIpAddress thành công!"
             };
+            // log ket qua
+            _logger.LogInformation(
+            "User gọi API Demo/Get lúc {Time}",
+            DateTime.Now
+        );
 
             return Ok(res);
         }
 
         [HttpGet("TestFilterNameAsync")]
         [BlockIpAddressFilterAsync(IpAddress = "199.111.122.133")]
+        [ServiceFilter(typeof(LogFilter))]
         public async Task<ActionResult> TestFilterBlockIpAddressAsync([FromQuery] string model)
         {
             Console.WriteLine($"Action handler");
@@ -40,11 +46,7 @@ namespace backend_netcore_dotnet06.Controllers
                 Message = "Bạn đã đi qua filter BlockIpAddressAsync thành công!"
             };
 
-            // log ket qua
-            _logger.LogInformation(
-            "User gọi API Demo/Get lúc {Time}",
-            DateTime.Now
-        );
+            
 
             return Ok(res);
         }

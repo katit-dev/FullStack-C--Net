@@ -150,6 +150,9 @@ Log.Logger = new LoggerConfiguration()
 // ILogger<T> trong Controller sẽ sử dụng Serilog
 builder.Services.AddSerilog();
 
+// DI filter LogFilter
+builder.Services.AddScoped<LogFilter>();
+
 var app = builder.Build();
 
 //Nếu là localhost (môi trường dev mới có trang swagger)
