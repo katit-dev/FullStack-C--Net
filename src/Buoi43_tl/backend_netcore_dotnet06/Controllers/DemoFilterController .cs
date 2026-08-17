@@ -46,9 +46,20 @@ namespace backend_netcore_dotnet06.Controllers
                 Message = "Bạn đã đi qua filter BlockIpAddressAsync thành công!"
             };
 
-            
+
 
             return Ok(res);
+        }
+
+
+        [HttpGet("TestExceptionFilter")]
+        [ServiceFilter(typeof(ExceptionActionFilter))] // Gắn filter ExceptionActionFilter vào action
+        public ActionResult TestExceptionFilter()
+        {
+            int a = 0;
+            int b = 1 / a; // This will throw a DivideByZeroException
+
+            return Ok(b);
         }
     }
 }

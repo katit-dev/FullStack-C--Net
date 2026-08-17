@@ -152,6 +152,8 @@ builder.Services.AddSerilog();
 
 // DI filter LogFilter
 builder.Services.AddScoped<LogFilter>();
+builder.Services.AddScoped<ExceptionActionFilter>();
+
 
 var app = builder.Build();
 
