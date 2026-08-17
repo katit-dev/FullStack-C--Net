@@ -34,7 +34,7 @@ public class LogFilter : ActionFilterAttribute
 
         // Log ra thông tin action name, parameters và response
         _logger.LogInformation(
-            $"Action: {actionName}, Parameters: {JsonSerializer.Serialize(parameters)}, Response: {JsonSerializer.Serialize(response)}"
+            $" Day la log filter, Action: {actionName}, Parameters: {JsonSerializer.Serialize(parameters)}, Response: {JsonSerializer.Serialize(response)}"
         );
     }
 }
