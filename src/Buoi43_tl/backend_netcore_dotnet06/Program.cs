@@ -49,6 +49,23 @@ builder.Services.AddDbContext<ProductStoreContext>();
 // DI controller co [Route]
 builder.Services.AddControllers();
 
+// DI Redis cache
+var redisServer = builder.Configuration["Redis:RedisServer"];
+var redisUsername = builder.Configuration["Redis:Username"];
+var redisPassword = builder.Configuration["Redis:password"];
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = redisServer;
+    options.InstanceName = builder.Configuration["Redis:InstanceName"];
+    options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions
+    {
+        EndPoints = { redisServer },
+        User = redisUsername,
+        Password = redisPassword
+    };
+});
+
 // DI Swagger
 builder.Services.AddSwaggerGen(options =>
 {
@@ -153,6 +170,7 @@ builder.Services.AddSerilog();
 // DI filter LogFilter
 builder.Services.AddScoped<LogFilter>();
 builder.Services.AddScoped<ExceptionActionFilter>();
+
 
 
 var app = builder.Build();
