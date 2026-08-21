@@ -1,8 +1,9 @@
-using StackExchange.Redis;
+using Microsoft.Extensions.Caching.Distributed;
 
 public class RedisService
 {
-    private readonly IConnectionMultiplexer _connectionMultiplexer;
+    private readonly IDistributedCache _cache;
+
 
     public int indexDB { get; set; } = 0;
 
@@ -10,25 +11,28 @@ public class RedisService
     // default 1 hour
 
 
-    public RedisService(
-        IConnectionMultiplexer connectionMultiplexer)
+    public RedisService(IDistributedCache cache)
     {
-        _connectionMultiplexer = connectionMultiplexer;
+        _cache = cache;
     }
 
 
-    // SET value vào Redis + thời gian hết hạn
+    // SET value vào Redis
     public async Task SetValueAsync(
         string key,
         string value)
     {
-        var db = _connectionMultiplexer
-            .GetDatabase(indexDB);
+        var options = new DistributedCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow =
+                TimeSpan.FromSeconds(expiresInSeconds)
+        };
 
-        await db.StringSetAsync(
+
+        await _cache.SetStringAsync(
             key,
             value,
-            TimeSpan.FromSeconds(expiresInSeconds)
+            options
         );
     }
 
@@ -37,20 +41,16 @@ public class RedisService
     public async Task<string?> GetValueAsync(
         string key)
     {
-        var db = _connectionMultiplexer
-            .GetDatabase(indexDB);
-
-        return await db.StringGetAsync(key);
+        return await _cache.GetStringAsync(key);
     }
 
 
-    // REMOVE key khỏi Redis
+    // REMOVE key
     public async Task<bool> RemoveKeyAsync(
         string key)
     {
-        var db = _connectionMultiplexer
-            .GetDatabase(indexDB);
+        await _cache.RemoveAsync(key);
 
-        return await db.KeyDeleteAsync(key);
+        return true;
     }
 }
