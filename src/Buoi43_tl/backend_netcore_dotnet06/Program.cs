@@ -58,13 +58,13 @@ var redisPassword = builder.Configuration["Redis:password"];
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = redisServer;
-    options.InstanceName = builder.Configuration["Redis:InstanceName"];
-    options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions
-    {
-        EndPoints = { redisServer },
-        User = redisUsername,
-        Password = redisPassword
-    };
+    // options.InstanceName = builder.Configuration["Redis:InstanceName"];
+    // options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions
+    // {
+    //     EndPoints = { redisServer },
+    //     User = redisUsername,
+    //     Password = redisPassword
+    // };
 });
 
 // DI Swagger
