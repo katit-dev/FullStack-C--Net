@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Models.Models;
 using Serilog;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
@@ -171,7 +172,8 @@ builder.Services.AddSerilog();
 builder.Services.AddScoped<LogFilter>();
 builder.Services.AddScoped<ExceptionActionFilter>();
 
-
+// DI Redis Service
+builder.Services.AddScoped<RedisService>();
 
 var app = builder.Build();
 
