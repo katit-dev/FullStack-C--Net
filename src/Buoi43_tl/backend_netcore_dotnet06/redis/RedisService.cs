@@ -6,6 +6,9 @@ public class RedisService
 
     public int indexDB { get; set; } = 0;
 
+    public int expiresInSeconds { get; set; } = 3600; 
+    // default 1 hour
+
 
     public RedisService(
         IConnectionMultiplexer connectionMultiplexer)
@@ -14,7 +17,7 @@ public class RedisService
     }
 
 
-    // SET value vào Redis
+    // SET value vào Redis + thời gian hết hạn
     public async Task SetValueAsync(
         string key,
         string value)
@@ -22,7 +25,11 @@ public class RedisService
         var db = _connectionMultiplexer
             .GetDatabase(indexDB);
 
-        await db.StringSetAsync(key, value);
+        await db.StringSetAsync(
+            key,
+            value,
+            TimeSpan.FromSeconds(expiresInSeconds)
+        );
     }
 
 
