@@ -23,7 +23,12 @@ namespace backend_netcore_dotnet06.Controllers
         }
 
 
-
+    /// <summary>
+    /// Đây là api dùng để lấy tất cả user từ redis, nếu không có trong redis thì sẽ lấy từ database và lưu vào redis.
+    /// </summary>
+    /// <returns>Danh sách người dùng.</returns>
+    /// <response code="200">Trả về danh sách người dùng.</response>
+    /// <response code="400">Lỗi khi lấy dữ liệu.</response>
         [HttpGet("GetAllUserRedis")]
         public async Task<IActionResult> GetAllUserRedis()
         {
