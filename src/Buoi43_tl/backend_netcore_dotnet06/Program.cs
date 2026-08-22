@@ -70,6 +70,15 @@ builder.Services.AddStackExchangeRedisCache(options =>
 // DI Swagger
 builder.Services.AddSwaggerGen(options =>
 {
+    // Viết doc cho Swagger API
+    // Nạp file XML chứa chú thích (summary, response...) để hiển thị trên Swagger UI
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (System.IO.File.Exists(xmlPath))
+    {
+        options.IncludeXmlComments(xmlPath);
+    }
+
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "My API",
