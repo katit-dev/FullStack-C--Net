@@ -48,6 +48,22 @@ namespace backend_netcore_dotnet06.Controllers
         }
 
         // api them user moi va db roi cap nhat lai cache all_users de cache khong bi du lieu cu
+        /// <summary>
+        /// Thêm người dùng mới và cập nhật cache.
+        /// </summary>
+        /// <param name="newUser">Người dùng mới cần thêm.</param>
+        /// <returns>Người dùng mới được thêm.</returns>
+        /// <response code="201">Người dùng mới được thêm thành công.</response>
+        /// <response code="400">Lỗi khi thêm người dùng.</response>
+        /// <remarks>
+        /// Mẫu yêu cầu:
+        ///
+        ///     POST /api/DemoCache/AddUserCache
+        ///     {
+        ///         "name": "Nguyen Van A",
+        ///         "email": "nguyenvana@example.com"
+        ///     }
+        /// </remarks>
         [HttpPost("AddUserCache")]
         public async Task<ActionResult> AddUserCache([FromBody] User newUser)
         {

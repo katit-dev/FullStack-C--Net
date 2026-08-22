@@ -4,6 +4,10 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Bat sinh file XML documentation de Swagger doc duoc summary/response -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Bo qua canh bao CS1591 khi thieu XML comment tren thanh vien public -->
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
